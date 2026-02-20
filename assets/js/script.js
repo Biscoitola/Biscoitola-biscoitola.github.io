@@ -1,4 +1,4 @@
-const IMG = {
+﻿const IMG = {
   cozinha:
     "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1200&q=80",
   limpeza:
@@ -7,6 +7,39 @@ const IMG = {
     "https://images.unsplash.com/photo-1604709177225-055f99402ea3?auto=format&fit=crop&w=1200&q=80",
   quarto:
     "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
+};
+
+const ITEM_PHOTOS = {
+  "coz-kit-panelas-tramontina": "img/panelas de indução.jpeg",
+  "coz-faqueiro-tramontina": "img/porta talher.jpeg",
+  "coz-porta-talheres": "img/porta talher.jpeg",
+  "coz-fritadeira-oster": "img/air fryer.jpeg",
+  "coz-organizadores-armario-prato": "img/organizador de louças.jpeg",
+  "coz-porta-temperos": "img/porta temperos.jpeg",
+  "coz-jarra-vidro": "img/jara de vidro.jpeg",
+  "coz-espremedor": "img/jara de vidro.jpeg",
+  "coz-liquidificador": "img/multiprocessador.jpeg",
+  "coz-batedeira": "img/batedeira.jpeg",
+  "coz-potes-hermeticos": "img/potes organizadores de lavanderia.jpeg",
+  "coz-lixo-grande": "img/lixeira.jpeg",
+  "coz-lixo-pequeno-bege": "img/lixeira2.jpeg",
+  "coz-multiprocessador": "img/multiprocessador.jpeg",
+  "coz-liquidificador-multiprocessador": "img/multiprocessador.jpeg",
+  "coz-tacas-agua": "img/taças para água.jpeg",
+  "lim-aspirador": "img/aspirador.jpeg",
+  "lim-aspirador-philco": "img/aspirador.jpeg",
+  "lim-vassoura-cabo": "img/pá e mini vassoura.jpeg",
+  "lim-rodo": "img/rodo.jpeg",
+  "lim-dispenser-lavanderia": "img/potes organizadores de lavanderia.jpeg",
+  "lim-pano-microfibra": "img/panos de microfriba.jpeg",
+  "lim-pano-chao": "img/panos de chão.jpeg",
+  "lim-pazinha": "img/pá e mini vassoura.jpeg",
+  "ban-chuveiro-eletrico": "img/cabo 2metros.jpeg",
+  "ban-toalha-rosto-buddemeyer": "img/toalhas de banho.jpeg",
+  "ban-lixeira-12l-inox": "img/lixeira2.jpeg",
+  "ban-kit-tapetes": "img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg",
+  "qua-kit-casal-4pecas-cor-lisa": "img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg",
+  "qua-kit-casal-4pecas": "img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg"
 };
 
 const categories = [
@@ -326,6 +359,10 @@ const itemMap = categories.flatMap((c) => c.items).reduce((acc, item) => {
   return acc;
 }, {});
 
+function getItemImage(item) {
+  return ITEM_PHOTOS[item.id] || item.image || IMG.cozinha;
+}
+
 function getSplitTotal(item) {
   return item?.split?.totalParts || 0;
 }
@@ -432,7 +469,7 @@ function openItemModal(itemId) {
   currentItemId = itemId;
   modalTitle.textContent = item.name;
   modalDescription.textContent = item.description || "Sem descricao.";
-  modalImage.src = item.image;
+  modalImage.src = getItemImage(item);
   modalImage.alt = item.name;
   modalLinks.innerHTML = buildLinksHtml(item.links);
 
@@ -530,7 +567,7 @@ function renderGiftSections() {
                 <div class="col-sm-6 col-lg-3">
                   <article class="gift-card ${reserved ? "reserved" : ""}" data-open-item="${item.id}">
                     <div class="gift-image-wrap">
-                      <img class="gift-image" src="${item.image}" alt="${item.name}" />
+                      <img class="gift-image" src="${getItemImage(item)}" alt="${item.name}" />
                       <span class="reserve-tag">
                         <i class="fa-solid ${reserveTagIcon(item)}"></i>${reserveTagText(item)}
                       </span>
@@ -636,3 +673,4 @@ navToggle.addEventListener("click", () => {
 
 drawerClose.addEventListener("click", closeDrawer);
 drawerBackdrop.addEventListener("click", closeDrawer);
+
