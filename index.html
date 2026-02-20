@@ -38,22 +38,30 @@
     <div class="bee" style="--x:90%; --y:18%; --s:0.86;"><span></span></div>
   </div>
 
-  <main class="py-5">
-    <section class="container">
-      <section class="welcome-hero text-center mb-5" id="inicio">
-        <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Bem-vindo(a)</p>
-        <h1 class="mb-2">Cha de Panela</h1>
-        <p class="mb-3">Escolha uma secao abaixo para ir direto aos presentes.</p>
-        <div id="welcome-buttons" class="welcome-buttons"></div>
-      </section>
-
-      <div class="page-head text-center mx-auto mb-4">
-        <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Cha de Panela</p>
-        <h1 class="mb-2">Lista de Presentes</h1>
-        <p class="mb-0">Escolha um item e clique em reservar. O status fica salvo no seu navegador.</p>
+  <main>
+    <section class="welcome-screen" id="inicio">
+      <div class="container">
+        <section class="welcome-hero text-center">
+          <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Bem-vindo(a)</p>
+          <h1 class="mb-2">Cha de Panela</h1>
+          <p class="mb-3">Escolha uma secao abaixo para ir direto aos presentes.</p>
+          <a class="welcome-enter" href="#lista-presentes">
+            <i class="fa-solid fa-gift me-2"></i>Entrar na lista
+          </a>
+          <div id="welcome-buttons" class="welcome-buttons mt-3"></div>
+        </section>
       </div>
+    </section>
 
-      <div id="gift-sections"></div>
+    <section id="lista-presentes" class="gift-page py-5">
+      <div class="container">
+        <div class="page-head text-center mx-auto mb-4">
+          <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Cha de Panela</p>
+          <h1 class="mb-2">Lista de Presentes</h1>
+          <p class="mb-0">Escolha um item e clique em reservar. O status fica salvo no seu navegador.</p>
+        </div>
+        <div id="gift-sections"></div>
+      </div>
     </section>
   </main>
 
