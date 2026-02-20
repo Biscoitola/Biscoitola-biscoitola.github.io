@@ -314,6 +314,12 @@ const splitMinus = document.getElementById("split-minus");
 const splitPlus = document.getElementById("split-plus");
 const splitSave = document.getElementById("split-save");
 const splitFull = document.getElementById("split-full");
+const navToggle = document.getElementById("nav-toggle");
+const drawer = document.getElementById("section-drawer");
+const drawerClose = document.getElementById("drawer-close");
+const drawerBackdrop = document.getElementById("drawer-backdrop");
+const sectionNavLinks = document.getElementById("section-nav-links");
+const welcomeButtons = document.getElementById("welcome-buttons");
 
 const itemMap = categories.flatMap((c) => c.items).reduce((acc, item) => {
   acc[item.id] = item;
@@ -465,6 +471,47 @@ function reserveTagIcon(item) {
   return isReserved(item) ? "fa-lock" : "fa-puzzle-piece";
 }
 
+function scrollToSectionById(sectionId) {
+  const target = document.getElementById(sectionId);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function openDrawer() {
+  drawer.classList.add("is-open");
+  drawer.setAttribute("aria-hidden", "false");
+  navToggle.setAttribute("aria-expanded", "true");
+  drawerBackdrop.hidden = false;
+}
+
+function closeDrawer() {
+  drawer.classList.remove("is-open");
+  drawer.setAttribute("aria-hidden", "true");
+  navToggle.setAttribute("aria-expanded", "false");
+  drawerBackdrop.hidden = true;
+}
+
+function buildNavigationUi() {
+  const sectionsHtml = categories
+    .map(
+      (category) => `
+      <button class="section-link" type="button" data-go-section="${category.id}">
+        <i class="fa-solid ${category.icon}"></i> ${category.title}
+      </button>`
+    )
+    .join("");
+
+  sectionNavLinks.innerHTML = sectionsHtml;
+  welcomeButtons.innerHTML = sectionsHtml.replaceAll("section-link", "welcome-btn");
+
+  document.querySelectorAll("[data-go-section]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      scrollToSectionById(btn.dataset.goSection);
+      closeDrawer();
+    });
+  });
+}
+
 function renderGiftSections() {
   const container = document.getElementById("gift-sections");
   container.innerHTML = categories
@@ -576,6 +623,16 @@ modal.querySelectorAll("[data-close-modal]").forEach((el) => {
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && modal.classList.contains("is-open")) closeItemModal();
+  if (event.key === "Escape" && drawer.classList.contains("is-open")) closeDrawer();
 });
 
 renderGiftSections();
+buildNavigationUi();
+
+navToggle.addEventListener("click", () => {
+  if (drawer.classList.contains("is-open")) closeDrawer();
+  else openDrawer();
+});
+
+drawerClose.addEventListener("click", closeDrawer);
+drawerBackdrop.addEventListener("click", closeDrawer);

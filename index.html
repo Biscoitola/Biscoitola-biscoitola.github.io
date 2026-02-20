@@ -12,6 +12,23 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <button id="nav-toggle" class="hamburger-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="section-drawer">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <aside id="section-drawer" class="section-drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <p class="mb-0"><i class="fa-solid fa-list"></i> Secoes do cha</p>
+      <button id="drawer-close" class="drawer-close" type="button" aria-label="Fechar menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <nav id="section-nav-links" class="section-nav-links" aria-label="Navegacao das secoes"></nav>
+  </aside>
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+
   <div class="bee-sky" aria-hidden="true">
     <div class="bee" style="--x:7%; --y:14%; --s:0.82;"><span></span></div>
     <div class="bee" style="--x:18%; --y:26%; --s:1.05;"><span></span></div>
@@ -23,6 +40,13 @@
 
   <main class="py-5">
     <section class="container">
+      <section class="welcome-hero text-center mb-5" id="inicio">
+        <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Bem-vindo(a)</p>
+        <h1 class="mb-2">Cha de Panela</h1>
+        <p class="mb-3">Escolha uma secao abaixo para ir direto aos presentes.</p>
+        <div id="welcome-buttons" class="welcome-buttons"></div>
+      </section>
+
       <div class="page-head text-center mx-auto mb-4">
         <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Cha de Panela</p>
         <h1 class="mb-2">Lista de Presentes</h1>
