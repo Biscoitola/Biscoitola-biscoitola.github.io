@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -60,7 +60,17 @@
           <h1 class="mb-2">Lista de Presentes</h1>
           <p class="mb-0">Escolha um item e clique em reservar. Com a API ligada, o status fica sincronizado para todos.</p>
         </div>
-                <!-- Cards de presentes ficam aqui, direto no HTML (duplique um card para adicionar novo item) -->
+                <!--
+                  Cards de presentes ficam aqui, direto no HTML.
+                  Para adicionar novo item, duplique um card existente e altere:
+                  - .gift-title (nome)
+                  - <img class="gift-image" src="..."> (foto)
+                  - .item-links-data (link(s) de compra)
+                  Modelo minimo de links:
+                  <script type="application/json" class="item-links-data">https://seu-link-aqui.com</script>
+                  Modelo com label:
+                  <script type="application/json" class="item-links-data">[{"label":"Amazon","url":"https://seu-link-aqui.com"}]</script>
+                -->
         <div id="gift-sections">
       <section id="cozinha" class="gift-group" data-section-title="Cozinha" data-section-icon="fa-utensils">
         <h2 class="group-title"><i class="fa-solid fa-utensils"></i>Cozinha</h2>
@@ -81,22 +91,7 @@
               </div>
             </article>
           </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-kit-panelas-bege-inducao" data-item-name="Kit panelas bege - fogao inducao" data-item-description="Conjunto de panelas bege compativel com fogao de inducao." data-item-image="img/panelas de indução.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/panelas de indução.jpeg" alt="Kit panelas bege - fogao inducao" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Kit panelas bege - fogao inducao</h3>
-                <p class="gift-description">Conjunto de panelas bege compativel com fogao de inducao.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-kit-panelas-bege-inducao">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1K9RCND&quot;}]</script>
-              </div>
-            </article>
-          </div>
+          
           <div class="col-sm-6 col-lg-3">
             <article class="gift-card" data-item-id="coz-faqueiro-tramontina" data-item-name="2 kits de talheres Tramontina" data-item-description="Faqueiro 16 pecas - linha Laguna." data-item-image="img/porta talher.jpeg">
               <div class="gift-image-wrap">
@@ -618,5 +613,4 @@
   <script src="assets/js/script.js"></script>
 </body>
 </html>
-
 

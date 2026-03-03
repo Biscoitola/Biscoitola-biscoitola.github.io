@@ -52,14 +52,44 @@ function decodeHtmlEntities(value) {
   return textarea.value;
 }
 
+function normalizeLinkEntry(entry, index) {
+  if (typeof entry === "string") {
+    const url = entry.trim();
+    if (!url) return null;
+    return { label: `Link ${index + 1}`, url };
+  }
+
+  if (entry && typeof entry === "object" && typeof entry.url === "string") {
+    const url = entry.url.trim();
+    if (!url) return null;
+    return {
+      label: typeof entry.label === "string" && entry.label.trim() ? entry.label.trim() : `Link ${index + 1}`,
+      url
+    };
+  }
+
+  return null;
+}
+
 function parseLinksFromCard(card) {
   const node = card.querySelector(".item-links-data");
   if (!node) return [];
 
+  const raw = decodeHtmlEntities((node.textContent || "").trim());
+  if (!raw) return [];
+
+  if (/^https?:\/\//i.test(raw)) {
+    return [{ label: "Link de compra", url: raw }];
+  }
+
   try {
-    const raw = decodeHtmlEntities(node.textContent || "[]");
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (Array.isArray(parsed)) {
+      return parsed.map((entry, index) => normalizeLinkEntry(entry, index)).filter(Boolean);
+    }
+
+    const single = normalizeLinkEntry(parsed, 0);
+    return single ? [single] : [];
   } catch {
     return [];
   }
@@ -67,14 +97,37 @@ function parseLinksFromCard(card) {
 
 function initializeItemsFromDom() {
   const nextMap = {};
+  const usedIds = new Set();
 
-  document.querySelectorAll(".gift-card[data-item-id]").forEach((card) => {
-    const id = card.dataset.itemId;
-    if (!id) return;
+  document.querySelectorAll(".gift-card").forEach((card, index) => {
+    const fallbackName = card.querySelector(".gift-title")?.textContent?.trim() || `item-${index + 1}`;
+    const baseId =
+      card.dataset.itemId ||
+      fallbackName
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "") ||
+      `item-${index + 1}`;
+
+    let id = baseId;
+    let suffix = 2;
+    while (usedIds.has(id)) {
+      id = `${baseId}-${suffix}`;
+      suffix += 1;
+    }
+    usedIds.add(id);
+    card.dataset.itemId = id;
+
+    const reserveButton = card.querySelector(".btn-reserve");
+    if (reserveButton && !reserveButton.dataset.reserve) {
+      reserveButton.dataset.reserve = id;
+    }
 
     nextMap[id] = {
       id,
-      name: card.dataset.itemName || card.querySelector(".gift-title")?.textContent?.trim() || id,
+      name: card.dataset.itemName || fallbackName || id,
       description:
         card.dataset.itemDescription || card.querySelector(".gift-description")?.textContent?.trim() || "",
       image: card.dataset.itemImage || card.querySelector(".gift-image")?.getAttribute("src") || "",
@@ -309,7 +362,7 @@ function updateCardUi(card) {
     tag.innerHTML = `<i class="fa-solid ${reserveTagIcon(item)}"></i>${reserveTagText(item)}`;
   }
 
-  const button = card.querySelector(`[data-reserve="${id}"]`);
+  const button = card.querySelector(".btn-reserve");
   if (button) {
     button.className = `btn-reserve ${reserved ? "release" : "reserve"}`;
     button.innerHTML = `<i class="fa-solid ${reserved ? "fa-rotate-left" : "fa-calendar-check"} me-2"></i>${
@@ -319,11 +372,11 @@ function updateCardUi(card) {
 }
 
 function renderGiftSections() {
-  document.querySelectorAll(".gift-card[data-item-id]").forEach(updateCardUi);
+  document.querySelectorAll(".gift-card").forEach(updateCardUi);
 }
 
 function bindGiftCardEvents() {
-  document.querySelectorAll(".gift-card[data-item-id]").forEach((card) => {
+  document.querySelectorAll(".gift-card").forEach((card) => {
     card.addEventListener("click", (event) => {
       const interactive = event.target.closest("button, a");
       if (interactive) return;
