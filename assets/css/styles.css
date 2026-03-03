@@ -259,6 +259,17 @@ footer,
   transform: scale(1.05);
 }
 
+.gift-card[data-item-id="coz-faqueiro-tramontina"] .gift-image {
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+  padding: 8px;
+}
+
+.gift-card[data-item-id="coz-faqueiro-tramontina"]:hover .gift-image {
+  transform: none;
+}
+
 .reserve-tag {
   position: absolute;
   right: 10px;
