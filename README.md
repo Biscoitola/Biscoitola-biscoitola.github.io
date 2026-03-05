@@ -94,3 +94,19 @@ ALLOWED_ORIGINS=https://SEU-USUARIO.github.io
 
 4) Publique no GitHub Pages e acesse:
 `https://SEU-USUARIO.github.io/SEU-REPOSITORIO/`
+
+### Deploy mais rapido (Render)
+
+Este repo ja inclui `render.yaml` com API + PostgreSQL.
+
+1) Faça push para o GitHub.
+2) No Render, clique em **New +** -> **Blueprint**.
+3) Selecione este repositório e confirme a criação.
+4) Após deploy, copie a URL da API (ex.: `https://cha-panela-api.onrender.com`).
+5) Atualize no `index.html`:
+
+```html
+<meta name="cha-panela-api-base-url" content="https://cha-panela-api.onrender.com" />
+```
+
+6) Faça novo push para atualizar o GitHub Pages.

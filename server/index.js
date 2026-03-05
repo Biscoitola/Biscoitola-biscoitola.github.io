@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const { Pool } = require("pg");
@@ -8,6 +9,7 @@ const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
+const ALLOW_ANY_ORIGIN = ALLOWED_ORIGINS.length === 0;
 
 if (!DATABASE_URL) {
   console.error("Missing DATABASE_URL environment variable.");
@@ -23,11 +25,15 @@ const app = express();
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const isAllowed = origin && ALLOWED_ORIGINS.includes(origin);
+  const isAllowed = Boolean(origin) && (ALLOW_ANY_ORIGIN || ALLOWED_ORIGINS.includes(origin));
 
   if (isAllowed) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader("Vary", "Origin");
+    if (ALLOW_ANY_ORIGIN) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    } else {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Vary", "Origin");
+    }
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   }
@@ -132,6 +138,23 @@ app.get("*", (req, res) => {
   return res.sendFile(path.resolve(__dirname, "..", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+async function ensureDatabaseReady() {
+  const schemaSql = fs.readFileSync(path.resolve(__dirname, "..", "database", "schema.sql"), "utf8");
+  const seedSql = fs.readFileSync(path.resolve(__dirname, "..", "database", "seed_items.sql"), "utf8");
+  await pool.query(schemaSql);
+  await pool.query(seedSql);
+}
+
+async function start() {
+  try {
+    await ensureDatabaseReady();
+    app.listen(PORT, () => {
+      console.log(`Server running at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("startup error", error);
+    process.exit(1);
+  }
+}
+
+void start();
