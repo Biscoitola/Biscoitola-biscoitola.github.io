@@ -1,6 +1,10 @@
 const STORAGE_KEY = "cha_panela_reservados";
 const SPLIT_STORAGE_KEY = "cha_panela_cotas";
-const API_BASE_URL = window.CHA_PANELA_API_BASE_URL || "";
+const API_BASE_URL_META = document
+  .querySelector('meta[name="cha-panela-api-base-url"]')
+  ?.getAttribute("content")
+  ?.trim();
+const API_BASE_URL = window.CHA_PANELA_API_BASE_URL || API_BASE_URL_META || "";
 const RESERVATION_REFRESH_MS = 15000;
 
 let reservedItems = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");

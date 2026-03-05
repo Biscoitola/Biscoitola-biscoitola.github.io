@@ -4,6 +4,10 @@ const { Pool } = require("pg");
 
 const PORT = Number(process.env.PORT || 3000);
 const DATABASE_URL = process.env.DATABASE_URL;
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 if (!DATABASE_URL) {
   console.error("Missing DATABASE_URL environment variable.");
@@ -16,6 +20,24 @@ const pool = new Pool({
 });
 
 const app = express();
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const isAllowed = origin && ALLOWED_ORIGINS.includes(origin);
+
+  if (isAllowed) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Vary", "Origin");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  }
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(isAllowed ? 204 : 403);
+  }
+
+  return next();
+});
 
 app.use(express.json());
 
