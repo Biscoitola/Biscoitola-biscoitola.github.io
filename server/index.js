@@ -6,6 +6,7 @@ const { Pool } = require("pg");
 
 const PORT = Number(process.env.PORT || 3000);
 const DATABASE_URL = process.env.DATABASE_URL;
+const ADMIN_RESET_TOKEN = normalizeActorName(process.env.ADMIN_RESET_TOKEN || "");
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
   .split(",")
   .map((origin) => origin.trim())
@@ -23,6 +24,15 @@ function sameActorName(left, right) {
 
 function hashPin(value) {
   return crypto.createHash("sha256").update(value).digest("hex");
+}
+
+function readAdminToken(req) {
+  return normalizeActorName(
+    req.headers["x-admin-token"] ||
+      req.query?.token ||
+      req.body?.token ||
+      ""
+  );
 }
 
 if (!DATABASE_URL) {
@@ -198,6 +208,35 @@ app.post("/api/items/:id/release", async (req, res) => {
   } catch (error) {
     console.error("release item error", error);
     return res.status(500).json({ error: "failed_to_release_item" });
+  }
+});
+
+app.post("/api/admin/reset-reservations", async (req, res) => {
+  if (!ADMIN_RESET_TOKEN) {
+    return res.status(503).json({ error: "admin_reset_token_not_configured" });
+  }
+
+  const requestToken = readAdminToken(req);
+  if (!requestToken || requestToken !== ADMIN_RESET_TOKEN) {
+    return res.status(403).json({ error: "forbidden" });
+  }
+
+  try {
+    const result = await pool.query(`
+      update gift_items
+      set
+        is_reserved = false,
+        reserved_by = null,
+        reserved_device_token = null,
+        reserved_pin_hash = null,
+        reserved_at = null
+      where is_reserved = true
+    `);
+
+    return res.json({ ok: true, resetCount: result.rowCount });
+  } catch (error) {
+    console.error("reset reservations error", error);
+    return res.status(500).json({ error: "failed_to_reset_reservations" });
   }
 });
 
