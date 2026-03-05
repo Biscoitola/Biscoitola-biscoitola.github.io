@@ -1,5 +1,6 @@
 const STORAGE_KEY = "cha_panela_reservados";
 const SPLIT_STORAGE_KEY = "cha_panela_cotas";
+const USER_NAME_STORAGE_KEY = "cha_panela_actor_name";
 const API_BASE_URL_META = document
   .querySelector('meta[name="cha-panela-api-base-url"]')
   ?.getAttribute("content")
@@ -7,7 +8,8 @@ const API_BASE_URL_META = document
 const API_BASE_URL = window.CHA_PANELA_API_BASE_URL || API_BASE_URL_META || "";
 const RESERVATION_REFRESH_MS = 15000;
 
-let reservedItems = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+let reservationState = loadReservationState();
+let currentActorName = loadActorName();
 let currentItemId = null;
 let isApiAvailable = false;
 let isLoadingReservations = false;
@@ -29,25 +31,123 @@ const welcomeButtons = document.getElementById("welcome-buttons");
 
 let itemMap = {};
 
+function normalizeActorName(value) {
+  if (typeof value !== "string") return "";
+  return value.trim().replace(/\s+/g, " ");
+}
+
+function actorNamesMatch(left, right) {
+  return normalizeActorName(left).toLowerCase() === normalizeActorName(right).toLowerCase();
+}
+
+function loadActorName() {
+  return normalizeActorName(localStorage.getItem(USER_NAME_STORAGE_KEY) || "");
+}
+
+function loadReservationState() {
+  const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  const nextState = {};
+
+  Object.entries(parsed || {}).forEach(([id, value]) => {
+    if (value === true) {
+      nextState[id] = { isReserved: true, reservedBy: null };
+      return;
+    }
+
+    if (value && typeof value === "object" && value.isReserved === true) {
+      nextState[id] = {
+        isReserved: true,
+        reservedBy: normalizeActorName(value.reservedBy || "")
+      };
+    }
+  });
+
+  return nextState;
+}
+
 function saveStates() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(reservedItems));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(reservationState));
   localStorage.removeItem(SPLIT_STORAGE_KEY);
 }
 
 function saveLocalOnlyReservationState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(reservedItems));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(reservationState));
+}
+
+function getReservation(item) {
+  return reservationState[item.id] || null;
 }
 
 function isReserved(item) {
-  return reservedItems[item.id] === true;
+  return Boolean(getReservation(item)?.isReserved);
+}
+
+function getReservedBy(item) {
+  return normalizeActorName(getReservation(item)?.reservedBy || "");
+}
+
+function isReservedByCurrentUser(item) {
+  if (!isReserved(item)) return false;
+  const reservedBy = getReservedBy(item);
+  if (!reservedBy || !currentActorName) return false;
+  return actorNamesMatch(reservedBy, currentActorName);
+}
+
+function isLockedForCurrentUser(item) {
+  return isReserved(item) && !isReservedByCurrentUser(item);
 }
 
 function reserveTagText(item) {
-  return isReserved(item) ? "Reservado" : "Disponivel";
+  if (!isReserved(item)) return "Disponivel";
+  if (isReservedByCurrentUser(item)) return "Reservado por voce";
+  return "Reservado";
 }
 
 function reserveTagIcon(item) {
   return isReserved(item) ? "fa-lock" : "fa-gift";
+}
+
+function getReserveButtonState(item) {
+  if (!isReserved(item)) {
+    return {
+      className: "reserve",
+      icon: "fa-calendar-check",
+      label: "Reservar item",
+      disabled: false
+    };
+  }
+
+  if (isReservedByCurrentUser(item)) {
+    return {
+      className: "release",
+      icon: "fa-rotate-left",
+      label: "Liberar item",
+      disabled: false
+    };
+  }
+
+  return {
+    className: "release",
+    icon: "fa-lock",
+    label: "Reservado",
+    disabled: true
+  };
+}
+
+function ensureActorName(promptMessage) {
+  if (currentActorName) return currentActorName;
+
+  const typed = window.prompt(promptMessage || "Digite seu nome para reservar itens:") || "";
+  const normalized = normalizeActorName(typed);
+
+  if (!normalized) {
+    alert("Informe seu nome para continuar.");
+    return null;
+  }
+
+  currentActorName = normalized;
+  localStorage.setItem(USER_NAME_STORAGE_KEY, currentActorName);
+  return currentActorName;
 }
 
 function decodeHtmlEntities(value) {
@@ -162,11 +262,10 @@ function buildLinksHtml(links) {
 }
 
 function updateRegularReserveButton(item) {
-  const reserved = isReserved(item);
-  modalReserveButton.className = `btn-reserve ${reserved ? "release" : "reserve"}`;
-  modalReserveButton.innerHTML = `<i class="fa-solid ${reserved ? "fa-rotate-left" : "fa-calendar-check"} me-2"></i>${
-    reserved ? "Liberar item" : "Reservar item"
-  }`;
+  const state = getReserveButtonState(item);
+  modalReserveButton.className = `btn-reserve ${state.className}`;
+  modalReserveButton.innerHTML = `<i class="fa-solid ${state.icon} me-2"></i>${state.label}`;
+  modalReserveButton.disabled = state.disabled;
 }
 
 function setReserveButtonsDisabled(itemId, disabled) {
@@ -210,11 +309,16 @@ async function apiFetchJson(path, options = {}) {
 }
 
 function applyRemoteStatuses(rows) {
-  const nextReserved = {};
+  const nextState = {};
   (rows || []).forEach((row) => {
-    if (row && row.id && row.is_reserved) nextReserved[row.id] = true;
+    if (row && row.id && row.is_reserved) {
+      nextState[row.id] = {
+        isReserved: true,
+        reservedBy: normalizeActorName(row.reserved_by || "")
+      };
+    }
   });
-  reservedItems = nextReserved;
+  reservationState = nextState;
   saveLocalOnlyReservationState();
 }
 
@@ -239,7 +343,17 @@ async function loadReservationsFromApi({ silent = false } = {}) {
 }
 
 async function toggleRegularReservation(item) {
+  if (isLockedForCurrentUser(item)) {
+    alert("Este item ja foi reservado por outra pessoa.");
+    return;
+  }
+
   const shouldReserve = !isReserved(item);
+  const actorName = ensureActorName(
+    shouldReserve ? "Digite seu nome para reservar este item:" : "Digite seu nome para liberar este item:"
+  );
+  if (!actorName) return;
+
   setReserveButtonsDisabled(item.id, true);
 
   if (!isApiAvailable) {
@@ -252,8 +366,11 @@ async function toggleRegularReservation(item) {
   }
 
   if (!isApiAvailable) {
-    reservedItems[item.id] = shouldReserve;
-    if (!reservedItems[item.id]) delete reservedItems[item.id];
+    if (shouldReserve) {
+      reservationState[item.id] = { isReserved: true, reservedBy: actorName };
+    } else {
+      delete reservationState[item.id];
+    }
     saveStates();
     renderGiftSections();
     if (currentItemId === item.id) updateRegularReserveButton(item);
@@ -263,12 +380,17 @@ async function toggleRegularReservation(item) {
 
   try {
     const endpoint = shouldReserve ? `/api/items/${item.id}/reserve` : `/api/items/${item.id}/release`;
-    await apiFetchJson(endpoint, { method: "POST", body: JSON.stringify({}) });
+    await apiFetchJson(endpoint, { method: "POST", body: JSON.stringify({ actorName }) });
     await loadReservationsFromApi({ silent: true });
   } catch (error) {
-    if (error.status === 409) {
+    if (error.status === 403) {
+      await loadReservationsFromApi({ silent: true });
+      alert("Este item foi reservado por outra pessoa e nao pode ser liberado por voce.");
+    } else if (error.status === 409) {
       await loadReservationsFromApi({ silent: true });
       alert(shouldReserve ? "Este item acabou de ser reservado por outra pessoa." : "Este item ja estava disponivel.");
+    } else if (error.status === 400) {
+      alert("Informe seu nome para continuar.");
     } else {
       console.error("Falha ao salvar reserva na API.", error);
       alert("Nao foi possivel atualizar a reserva agora. Tente novamente.");
@@ -281,7 +403,7 @@ async function toggleRegularReservation(item) {
 
 function openItemModal(itemId) {
   const item = itemMap[itemId];
-  if (!item) return;
+  if (!item || isLockedForCurrentUser(item)) return;
 
   currentItemId = itemId;
   modalTitle.textContent = item.name;
@@ -359,7 +481,9 @@ function updateCardUi(card) {
   if (!item) return;
 
   const reserved = isReserved(item);
+  const locked = isLockedForCurrentUser(item);
   card.classList.toggle("reserved", reserved);
+  card.classList.toggle("locked", locked);
 
   const tag = card.querySelector(".reserve-tag");
   if (tag) {
@@ -368,10 +492,10 @@ function updateCardUi(card) {
 
   const button = card.querySelector(".btn-reserve");
   if (button) {
-    button.className = `btn-reserve ${reserved ? "release" : "reserve"}`;
-    button.innerHTML = `<i class="fa-solid ${reserved ? "fa-rotate-left" : "fa-calendar-check"} me-2"></i>${
-      reserved ? "Liberar item" : "Reservar item"
-    }`;
+    const state = getReserveButtonState(item);
+    button.className = `btn-reserve ${state.className}`;
+    button.innerHTML = `<i class="fa-solid ${state.icon} me-2"></i>${state.label}`;
+    button.disabled = state.disabled;
   }
 }
 
@@ -384,6 +508,10 @@ function bindGiftCardEvents() {
     card.addEventListener("click", (event) => {
       const interactive = event.target.closest("button, a");
       if (interactive) return;
+
+      const item = itemMap[card.dataset.itemId];
+      if (!item) return;
+      if (isLockedForCurrentUser(item)) return;
       openItemModal(card.dataset.itemId);
     });
   });

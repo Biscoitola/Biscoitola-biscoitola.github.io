@@ -13,8 +13,8 @@ order by category_id, name;
 -- Try to reserve one item (returns true if success)
 select reserve_gift_item('coz-porta-talheres', 'Nome da pessoa');
 
--- Try to release one item (returns true if success)
-select release_gift_item('coz-porta-talheres', 'Admin');
+-- Try to release one item (same actor that reserved it)
+select release_gift_item('coz-porta-talheres', 'Nome da pessoa');
 
 -- Reservation history (optional admin view)
 select

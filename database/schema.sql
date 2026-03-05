@@ -50,11 +50,17 @@ returns boolean
 language plpgsql
 as $$
 declare
+  v_actor_name text;
   v_rows integer;
 begin
+  v_actor_name := nullif(trim(p_actor_name), '');
+  if v_actor_name is null then
+    return false;
+  end if;
+
   update gift_items
      set is_reserved = true,
-         reserved_by = nullif(trim(p_actor_name), ''),
+         reserved_by = v_actor_name,
          reserved_at = now()
    where id = p_item_id
      and is_reserved = false;
@@ -63,7 +69,7 @@ begin
 
   if v_rows = 1 then
     insert into reservation_events(item_id, action, actor_name)
-    values (p_item_id, 'reserve', nullif(trim(p_actor_name), ''));
+    values (p_item_id, 'reserve', v_actor_name);
     return true;
   end if;
 
@@ -77,14 +83,21 @@ returns boolean
 language plpgsql
 as $$
 declare
+  v_actor_name text;
   v_rows integer;
 begin
+  v_actor_name := nullif(trim(p_actor_name), '');
+  if v_actor_name is null then
+    return false;
+  end if;
+
   update gift_items
      set is_reserved = false,
          reserved_by = null,
          reserved_at = null
    where id = p_item_id
-     and is_reserved = true;
+     and is_reserved = true
+     and lower(coalesce(reserved_by, '')) = lower(v_actor_name);
 
   get diagnostics v_rows = row_count;
 

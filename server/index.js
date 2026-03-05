@@ -11,6 +11,15 @@ const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
   .filter(Boolean);
 const ALLOW_ANY_ORIGIN = ALLOWED_ORIGINS.length === 0;
 
+function normalizeActorName(value) {
+  if (typeof value !== "string") return "";
+  return value.trim().replace(/\s+/g, " ");
+}
+
+function sameActorName(left, right) {
+  return normalizeActorName(left).toLowerCase() === normalizeActorName(right).toLowerCase();
+}
+
 if (!DATABASE_URL) {
   console.error("Missing DATABASE_URL environment variable.");
   process.exit(1);
@@ -84,10 +93,13 @@ app.get("/api/items", async (_req, res) => {
 
 app.post("/api/items/:id/reserve", async (req, res) => {
   const itemId = String(req.params.id || "").trim();
-  const actorName = typeof req.body?.actorName === "string" ? req.body.actorName : null;
+  const actorName = normalizeActorName(req.body?.actorName);
 
   if (!itemId) {
     return res.status(400).json({ error: "invalid_item_id" });
+  }
+  if (!actorName) {
+    return res.status(400).json({ error: "actor_name_required" });
   }
 
   try {
@@ -107,13 +119,38 @@ app.post("/api/items/:id/reserve", async (req, res) => {
 
 app.post("/api/items/:id/release", async (req, res) => {
   const itemId = String(req.params.id || "").trim();
-  const actorName = typeof req.body?.actorName === "string" ? req.body.actorName : null;
+  const actorName = normalizeActorName(req.body?.actorName);
 
   if (!itemId) {
     return res.status(400).json({ error: "invalid_item_id" });
   }
+  if (!actorName) {
+    return res.status(400).json({ error: "actor_name_required" });
+  }
 
   try {
+    const itemResult = await pool.query(
+      `
+      select id, is_reserved, reserved_by
+      from gift_items
+      where id = $1
+      `,
+      [itemId]
+    );
+
+    if (itemResult.rowCount === 0) {
+      return res.status(404).json({ error: "item_not_found" });
+    }
+
+    const item = itemResult.rows[0];
+    if (!item.is_reserved) {
+      return res.status(409).json({ error: "item_already_available_or_not_found" });
+    }
+
+    if (!sameActorName(item.reserved_by, actorName)) {
+      return res.status(403).json({ error: "item_reserved_by_another_user" });
+    }
+
     const result = await pool.query("select release_gift_item($1, $2) as success", [itemId, actorName]);
     const success = result.rows[0]?.success === true;
 

@@ -299,6 +299,10 @@ footer,
   color: #fff;
 }
 
+.gift-card.locked {
+  opacity: 0.92;
+}
+
 .gift-body {
   padding: 14px;
 }
@@ -336,6 +340,13 @@ footer,
 .btn-reserve:hover {
   transform: translateY(-2px);
   filter: brightness(1.02);
+}
+
+.btn-reserve:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
 }
 
 .item-modal {
