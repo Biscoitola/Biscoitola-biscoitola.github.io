@@ -1,4 +1,4 @@
-﻿const STORAGE_KEY = "cha_panela_reservados";
+const STORAGE_KEY = "cha_panela_reservados";
 const SPLIT_STORAGE_KEY = "cha_panela_cotas";
 const API_BASE_URL = window.CHA_PANELA_API_BASE_URL || "";
 const RESERVATION_REFRESH_MS = 15000;
@@ -130,7 +130,7 @@ function initializeItemsFromDom() {
       name: card.dataset.itemName || fallbackName || id,
       description:
         card.dataset.itemDescription || card.querySelector(".gift-description")?.textContent?.trim() || "",
-      image: card.dataset.itemImage || card.querySelector(".gift-image")?.getAttribute("src") || "",
+      image: card.querySelector(".gift-image")?.getAttribute("src") || card.dataset.itemImage || "",
       links: parseLinksFromCard(card)
     };
   });
