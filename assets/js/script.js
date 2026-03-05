@@ -1,6 +1,8 @@
 const STORAGE_KEY = "cha_panela_reservados";
 const SPLIT_STORAGE_KEY = "cha_panela_cotas";
 const USER_NAME_STORAGE_KEY = "cha_panela_actor_name";
+const USER_PIN_STORAGE_KEY = "cha_panela_actor_pin";
+const DEVICE_TOKEN_STORAGE_KEY = "cha_panela_device_token";
 const API_BASE_URL_META = document
   .querySelector('meta[name="cha-panela-api-base-url"]')
   ?.getAttribute("content")
@@ -10,6 +12,8 @@ const RESERVATION_REFRESH_MS = 15000;
 
 let reservationState = loadReservationState();
 let currentActorName = loadActorName();
+let currentActorPin = loadActorPin();
+const currentActorToken = loadOrCreateDeviceToken();
 let currentItemId = null;
 let isApiAvailable = false;
 let isLoadingReservations = false;
@@ -42,6 +46,25 @@ function actorNamesMatch(left, right) {
 
 function loadActorName() {
   return normalizeActorName(localStorage.getItem(USER_NAME_STORAGE_KEY) || "");
+}
+
+function loadActorPin() {
+  return normalizeActorName(localStorage.getItem(USER_PIN_STORAGE_KEY) || "");
+}
+
+function createRandomToken() {
+  if (window.crypto && typeof window.crypto.randomUUID === "function") {
+    return window.crypto.randomUUID();
+  }
+  return `device-${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+}
+
+function loadOrCreateDeviceToken() {
+  const existing = normalizeActorName(localStorage.getItem(DEVICE_TOKEN_STORAGE_KEY) || "");
+  if (existing) return existing;
+  const created = createRandomToken();
+  localStorage.setItem(DEVICE_TOKEN_STORAGE_KEY, created);
+  return created;
 }
 
 function loadReservationState() {
@@ -148,6 +171,36 @@ function ensureActorName(promptMessage) {
   currentActorName = normalized;
   localStorage.setItem(USER_NAME_STORAGE_KEY, currentActorName);
   return currentActorName;
+}
+
+function ensureActorPin() {
+  if (currentActorPin && currentActorPin.length >= 4) return currentActorPin;
+
+  const typed = window.prompt("Crie um PIN (minimo 4 caracteres) para proteger suas reservas:") || "";
+  const normalized = normalizeActorName(typed);
+
+  if (!normalized || normalized.length < 4) {
+    alert("Informe um PIN com pelo menos 4 caracteres.");
+    return null;
+  }
+
+  const confirmTyped = window.prompt("Confirme seu PIN:") || "";
+  const confirmNormalized = normalizeActorName(confirmTyped);
+  if (confirmNormalized !== normalized) {
+    alert("PIN nao confere. Tente novamente.");
+    return null;
+  }
+
+  currentActorPin = normalized;
+  localStorage.setItem(USER_PIN_STORAGE_KEY, currentActorPin);
+  return currentActorPin;
+}
+
+function askRecoveryPin() {
+  const typed = window.prompt("Este item foi reservado em outro dispositivo. Digite seu PIN para liberar:") || "";
+  const normalized = normalizeActorName(typed);
+  if (!normalized || normalized.length < 4) return null;
+  return normalized;
 }
 
 function decodeHtmlEntities(value) {
@@ -353,6 +406,8 @@ async function toggleRegularReservation(item) {
     shouldReserve ? "Digite seu nome para reservar este item:" : "Digite seu nome para liberar este item:"
   );
   if (!actorName) return;
+  const actorPin = shouldReserve ? ensureActorPin() : currentActorPin;
+  if (shouldReserve && !actorPin) return;
 
   setReserveButtonsDisabled(item.id, true);
 
@@ -380,17 +435,47 @@ async function toggleRegularReservation(item) {
 
   try {
     const endpoint = shouldReserve ? `/api/items/${item.id}/reserve` : `/api/items/${item.id}/release`;
-    await apiFetchJson(endpoint, { method: "POST", body: JSON.stringify({ actorName }) });
+    const payload = shouldReserve
+      ? { actorName, actorToken: currentActorToken, actorPin }
+      : { actorName, actorToken: currentActorToken, actorPin };
+    await apiFetchJson(endpoint, { method: "POST", body: JSON.stringify(payload) });
     await loadReservationsFromApi({ silent: true });
   } catch (error) {
     if (error.status === 403) {
+      if (!shouldReserve) {
+        const recoveryPin = askRecoveryPin();
+        if (recoveryPin) {
+          try {
+            await apiFetchJson(`/api/items/${item.id}/release`, {
+              method: "POST",
+              body: JSON.stringify({ actorName, actorToken: currentActorToken, actorPin: recoveryPin })
+            });
+            currentActorPin = recoveryPin;
+            localStorage.setItem(USER_PIN_STORAGE_KEY, recoveryPin);
+            await loadReservationsFromApi({ silent: true });
+            return;
+          } catch (retryError) {
+            if (retryError.status === 403) {
+              alert("PIN invalido ou reserva pertence a outra pessoa.");
+            } else {
+              console.error("Falha ao recuperar liberacao por PIN.", retryError);
+              alert("Nao foi possivel validar seu PIN agora. Tente novamente.");
+            }
+          }
+        }
+      } else {
+        alert("Este item foi reservado por outra pessoa e nao pode ser alterado por voce.");
+      }
       await loadReservationsFromApi({ silent: true });
-      alert("Este item foi reservado por outra pessoa e nao pode ser liberado por voce.");
     } else if (error.status === 409) {
       await loadReservationsFromApi({ silent: true });
       alert(shouldReserve ? "Este item acabou de ser reservado por outra pessoa." : "Este item ja estava disponivel.");
     } else if (error.status === 400) {
-      alert("Informe seu nome para continuar.");
+      if (error.payload?.error === "actor_pin_required") {
+        alert("Defina um PIN com pelo menos 4 caracteres para reservar.");
+      } else {
+        alert("Informe seus dados para continuar.");
+      }
     } else {
       console.error("Falha ao salvar reserva na API.", error);
       alert("Nao foi possivel atualizar a reserva agora. Tente novamente.");

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const express = require("express");
 const { Pool } = require("pg");
 
@@ -18,6 +19,10 @@ function normalizeActorName(value) {
 
 function sameActorName(left, right) {
   return normalizeActorName(left).toLowerCase() === normalizeActorName(right).toLowerCase();
+}
+
+function hashPin(value) {
+  return crypto.createHash("sha256").update(value).digest("hex");
 }
 
 if (!DATABASE_URL) {
@@ -94,6 +99,8 @@ app.get("/api/items", async (_req, res) => {
 app.post("/api/items/:id/reserve", async (req, res) => {
   const itemId = String(req.params.id || "").trim();
   const actorName = normalizeActorName(req.body?.actorName);
+  const actorToken = normalizeActorName(req.body?.actorToken);
+  const actorPin = normalizeActorName(req.body?.actorPin);
 
   if (!itemId) {
     return res.status(400).json({ error: "invalid_item_id" });
@@ -101,9 +108,20 @@ app.post("/api/items/:id/reserve", async (req, res) => {
   if (!actorName) {
     return res.status(400).json({ error: "actor_name_required" });
   }
+  if (!actorToken) {
+    return res.status(400).json({ error: "actor_token_required" });
+  }
+  if (!actorPin || actorPin.length < 4) {
+    return res.status(400).json({ error: "actor_pin_required" });
+  }
 
   try {
-    const result = await pool.query("select reserve_gift_item($1, $2) as success", [itemId, actorName]);
+    const result = await pool.query("select reserve_gift_item($1, $2, $3, $4) as success", [
+      itemId,
+      actorName,
+      actorToken,
+      hashPin(actorPin)
+    ]);
     const success = result.rows[0]?.success === true;
 
     if (!success) {
@@ -120,6 +138,9 @@ app.post("/api/items/:id/reserve", async (req, res) => {
 app.post("/api/items/:id/release", async (req, res) => {
   const itemId = String(req.params.id || "").trim();
   const actorName = normalizeActorName(req.body?.actorName);
+  const actorToken = normalizeActorName(req.body?.actorToken);
+  const actorPin = normalizeActorName(req.body?.actorPin);
+  const actorPinHash = actorPin ? hashPin(actorPin) : null;
 
   if (!itemId) {
     return res.status(400).json({ error: "invalid_item_id" });
@@ -127,11 +148,14 @@ app.post("/api/items/:id/release", async (req, res) => {
   if (!actorName) {
     return res.status(400).json({ error: "actor_name_required" });
   }
+  if (!actorToken) {
+    return res.status(400).json({ error: "actor_token_required" });
+  }
 
   try {
     const itemResult = await pool.query(
       `
-      select id, is_reserved, reserved_by
+      select id, is_reserved, reserved_by, reserved_device_token, reserved_pin_hash
       from gift_items
       where id = $1
       `,
@@ -147,11 +171,23 @@ app.post("/api/items/:id/release", async (req, res) => {
       return res.status(409).json({ error: "item_already_available_or_not_found" });
     }
 
-    if (!sameActorName(item.reserved_by, actorName)) {
+    const tokenMatches = item.reserved_device_token === actorToken;
+    const legacyOwnerMatches = !item.reserved_device_token && sameActorName(item.reserved_by, actorName);
+    const pinMatches =
+      Boolean(actorPinHash) &&
+      item.reserved_pin_hash === actorPinHash &&
+      sameActorName(item.reserved_by, actorName);
+
+    if (!tokenMatches && !legacyOwnerMatches && !pinMatches) {
       return res.status(403).json({ error: "item_reserved_by_another_user" });
     }
 
-    const result = await pool.query("select release_gift_item($1, $2) as success", [itemId, actorName]);
+    const result = await pool.query("select release_gift_item($1, $2, $3, $4) as success", [
+      itemId,
+      actorName,
+      actorToken,
+      actorPinHash
+    ]);
     const success = result.rows[0]?.success === true;
 
     if (!success) {
