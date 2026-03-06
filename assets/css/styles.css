@@ -309,6 +309,10 @@ footer,
   color: #3d6f94;
 }
 
+.gift-card .btn-reserve {
+  display: none;
+}
+
 .btn-reserve {
   width: 100%;
   border: 0;
