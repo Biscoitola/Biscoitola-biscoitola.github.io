@@ -310,7 +310,7 @@ footer,
 }
 
 .gift-card .btn-reserve {
-  display: none;
+  display: none !important;
 }
 
 .btn-reserve {
