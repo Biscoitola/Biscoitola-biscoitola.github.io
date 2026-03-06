@@ -1,4 +1,4 @@
-const fs = require("fs");
+﻿const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const express = require("express");
@@ -112,12 +112,9 @@ app.get("/api/messages", async (_req, res) => {
       `
       select
         re.event_id,
-        re.item_id,
-        gi.name as item_name,
         re.actor_name as message,
         re.created_at
       from reservation_events re
-      left join gift_items gi on gi.id = re.item_id
       where re.action = 'reserve'
         and nullif(trim(re.actor_name), '') is not null
       order by re.created_at desc
@@ -296,3 +293,4 @@ async function start() {
 }
 
 void start();
+
