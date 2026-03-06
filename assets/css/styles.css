@@ -251,23 +251,14 @@ footer,
 .gift-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
   transition: transform 0.45s ease;
 }
 
 .gift-card:hover .gift-image {
-  transform: scale(1.05);
-}
-
-.gift-card[data-item-id="coz-faqueiro-tramontina"] .gift-image {
-  object-fit: contain;
-  object-position: center;
-  background: #fff;
-  padding: 8px;
-}
-
-.gift-card[data-item-id="coz-faqueiro-tramontina"]:hover .gift-image {
-  transform: none;
+  transform: scale(1.02);
 }
 
 .reserve-tag {
@@ -405,6 +396,27 @@ footer,
   object-fit: cover;
 }
 
+.item-modal.is-pix .item-modal-media {
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-modal.is-pix .item-modal-media img {
+  object-fit: contain;
+}
+
+.item-modal.is-pix .item-modal-panel {
+  grid-template-rows: minmax(420px, 60vh) 1fr;
+}
+
+@media (max-width: 767px) {
+  .item-modal.is-pix .item-modal-panel {
+    grid-template-rows: minmax(320px, 48vh) 1fr;
+  }
+}
+
 .item-modal-content {
   padding: 16px;
   overflow: auto;
@@ -515,6 +527,11 @@ footer,
 
 .item-link:hover {
   background: rgba(191, 226, 251, 0.68);
+}
+
+.item-link-copy {
+  border: 1px solid rgba(41, 86, 119, 0.14);
+  cursor: pointer;
 }
 
 .gift-card[data-open-item] {

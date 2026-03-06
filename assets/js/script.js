@@ -1,4 +1,4 @@
-const STORAGE_KEY = "cha_panela_reservados";
+﻿const STORAGE_KEY = "cha_panela_reservados";
 const SPLIT_STORAGE_KEY = "cha_panela_cotas";
 const USER_NAME_STORAGE_KEY = "cha_panela_actor_name";
 const USER_PIN_STORAGE_KEY = "cha_panela_actor_pin";
@@ -121,8 +121,8 @@ function isLockedForCurrentUser(item) {
 }
 
 function reserveTagText(item) {
-  if (!isReserved(item)) return "Disponivel";
-  if (isReservedByCurrentUser(item)) return "Reservado por voce";
+  if (!isReserved(item)) return "Disponível";
+  if (isReservedByCurrentUser(item)) return "Reservado por você";
   return "Reservado";
 }
 
@@ -176,7 +176,7 @@ function ensureActorName(promptMessage) {
 function ensureActorPin() {
   if (currentActorPin && currentActorPin.length >= 4) return currentActorPin;
 
-  const typed = window.prompt("Crie um PIN (minimo 4 caracteres) para proteger suas reservas:") || "";
+  const typed = window.prompt("Crie um PIN (mínimo 4 caracteres) para proteger suas reservas:") || "";
   const normalized = normalizeActorName(typed);
 
   if (!normalized || normalized.length < 4) {
@@ -187,7 +187,7 @@ function ensureActorPin() {
   const confirmTyped = window.prompt("Confirme seu PIN:") || "";
   const confirmNormalized = normalizeActorName(confirmTyped);
   if (confirmNormalized !== normalized) {
-    alert("PIN nao confere. Tente novamente.");
+    alert("PIN não confere. Tente novamente.");
     return null;
   }
 
@@ -288,7 +288,10 @@ function initializeItemsFromDom() {
       description:
         card.dataset.itemDescription || card.querySelector(".gift-description")?.textContent?.trim() || "",
       image: card.querySelector(".gift-image")?.getAttribute("src") || card.dataset.itemImage || "",
-      links: parseLinksFromCard(card)
+      modalImage: card.dataset.itemModalImage || "",
+      pixKey: normalizeActorName(card.dataset.pixKey || ""),
+      links: parseLinksFromCard(card),
+      reservable: card.dataset.reservable !== "false"
     };
   });
 
@@ -296,12 +299,12 @@ function initializeItemsFromDom() {
 }
 
 function getItemImage(item) {
-  return item?.image || "";
+  return item?.modalImage || item?.image || "";
 }
 
 function buildLinksHtml(links) {
   if (!links || links.length === 0) {
-    return '<div class="item-link"><i class="fa-solid fa-hourglass-half"></i> Link em breve</div>';
+    return '<div class="item-link"><i class="fa-solid fa-bag-shopping"></i> Compra de sua escolha</div>';
   }
 
   return links
@@ -312,6 +315,38 @@ function buildLinksHtml(links) {
       </a>`
     )
     .join("");
+}
+
+function buildPixLinksHtml(pixKey) {
+  if (!pixKey) return "";
+  return `
+    <button class="item-link item-link-copy" type="button" data-copy-text="${pixKey}">
+      <i class="fa-solid fa-copy"></i> Copiar chave Pix
+    </button>`;
+}
+
+async function copyTextToClipboard(text) {
+  if (!text) return false;
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // fallback below
+  }
+
+  const input = document.createElement("textarea");
+  input.value = text;
+  input.setAttribute("readonly", "");
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  document.body.appendChild(input);
+  input.select();
+  const copied = document.execCommand("copy");
+  document.body.removeChild(input);
+  return copied;
 }
 
 function updateRegularReserveButton(item) {
@@ -388,7 +423,7 @@ async function loadReservationsFromApi({ silent = false } = {}) {
     return true;
   } catch (error) {
     isApiAvailable = false;
-    if (!silent) console.warn("API indisponivel. Usando estado local.", error);
+    if (!silent) console.warn("API indisponível. Usando estado local.", error);
     return false;
   } finally {
     isLoadingReservations = false;
@@ -397,7 +432,7 @@ async function loadReservationsFromApi({ silent = false } = {}) {
 
 async function toggleRegularReservation(item) {
   if (isLockedForCurrentUser(item)) {
-    alert("Este item ja foi reservado por outra pessoa.");
+    alert("Este item já foi reservado por outra pessoa.");
     return;
   }
 
@@ -456,20 +491,20 @@ async function toggleRegularReservation(item) {
             return;
           } catch (retryError) {
             if (retryError.status === 403) {
-              alert("PIN invalido ou reserva pertence a outra pessoa.");
+              alert("PIN inválido ou reserva pertence a outra pessoa.");
             } else {
               console.error("Falha ao recuperar liberacao por PIN.", retryError);
-              alert("Nao foi possivel validar seu PIN agora. Tente novamente.");
+              alert("Não foi possível validar seu PIN agora. Tente novamente.");
             }
           }
         }
       } else {
-        alert("Este item foi reservado por outra pessoa e nao pode ser alterado por voce.");
+        alert("Este item foi reservado por outra pessoa e não pode ser alterado por você.");
       }
       await loadReservationsFromApi({ silent: true });
     } else if (error.status === 409) {
       await loadReservationsFromApi({ silent: true });
-      alert(shouldReserve ? "Este item acabou de ser reservado por outra pessoa." : "Este item ja estava disponivel.");
+      alert(shouldReserve ? "Este item acabou de ser reservado por outra pessoa." : "Este item já estava disponivel.");
     } else if (error.status === 400) {
       if (error.payload?.error === "actor_pin_required") {
         alert("Defina um PIN com pelo menos 4 caracteres para reservar.");
@@ -478,7 +513,7 @@ async function toggleRegularReservation(item) {
       }
     } else {
       console.error("Falha ao salvar reserva na API.", error);
-      alert("Nao foi possivel atualizar a reserva agora. Tente novamente.");
+      alert("Não foi possível atualizar a reserva agora. Tente novamente.");
     }
   } finally {
     setReserveButtonsDisabled(item.id, false);
@@ -492,14 +527,21 @@ function openItemModal(itemId) {
 
   currentItemId = itemId;
   modalTitle.textContent = item.name;
-  modalDescription.textContent = item.description || "Sem descricao.";
+  modalDescription.textContent = item.description || "Sem descrição.";
   modalImage.src = getItemImage(item);
   modalImage.alt = item.name;
-  modalLinks.innerHTML = buildLinksHtml(item.links);
+  modalLinks.innerHTML = item.reservable ? buildLinksHtml(item.links) : buildPixLinksHtml(item.pixKey);
 
   if (modalSplit) modalSplit.hidden = true;
-  modalReserveButton.hidden = false;
-  updateRegularReserveButton(item);
+  if (item.reservable) {
+    modalReserveButton.hidden = false;
+    updateRegularReserveButton(item);
+  } else {
+    modalReserveButton.hidden = true;
+    modalReserveButton.disabled = true;
+  }
+
+  modal.classList.toggle("is-pix", item.id === "pix-contribuicao");
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
@@ -509,6 +551,7 @@ function openItemModal(itemId) {
 function closeItemModal() {
   currentItemId = null;
   modal.classList.remove("is-open");
+  modal.classList.remove("is-pix");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
@@ -534,7 +577,7 @@ function closeDrawer() {
 }
 
 function buildNavigationUi() {
-  const sections = Array.from(document.querySelectorAll("#gift-sections > .gift-group[id]"));
+  const sections = Array.from(document.querySelectorAll("#gift-sections .gift-group[id]"));
 
   const sectionsHtml = sections
     .map((section) => {
@@ -613,7 +656,7 @@ function bindGiftCardEvents() {
 
 modalReserveButton.addEventListener("click", () => {
   const item = itemMap[currentItemId];
-  if (!item) return;
+  if (!item || !item.reservable) return;
   void toggleRegularReservation(item);
 });
 
@@ -642,3 +685,21 @@ navToggle.addEventListener("click", () => {
 
 drawerClose.addEventListener("click", closeDrawer);
 drawerBackdrop.addEventListener("click", closeDrawer);
+
+document.addEventListener("click", async (event) => {
+  const copyButton = event.target.closest("[data-copy-text]");
+  if (!copyButton) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const textToCopy = normalizeActorName(copyButton.getAttribute("data-copy-text") || "");
+  const copied = await copyTextToClipboard(textToCopy);
+
+  if (copied) {
+    alert("Chave Pix copiada!");
+  } else {
+    alert("Não foi possível copiar automaticamente. Copie manualmente: " + textToCopy);
+  }
+});
+

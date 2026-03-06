@@ -1,19 +1,24 @@
 ﻿<!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="cha-panela-api-base-url" content="https://cp-api-biscoitola-2026.onrender.com" />
-  <title>Cha de Panela | Lista de Presentes</title>
+  <title>Chá de Panela | Lista de Presentes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
+
 <body>
-  <button id="nav-toggle" class="hamburger-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="section-drawer">
+  <button id="nav-toggle" class="hamburger-btn" type="button" aria-label="Abrir menu" aria-expanded="false"
+    aria-controls="section-drawer">
     <span></span>
     <span></span>
     <span></span>
@@ -21,12 +26,12 @@
 
   <aside id="section-drawer" class="section-drawer" aria-hidden="true">
     <div class="drawer-head">
-      <p class="mb-0"><i class="fa-solid fa-list"></i> Secoes do cha</p>
+      <p class="mb-0"><i class="fa-solid fa-list"></i> Seções do chá</p>
       <button id="drawer-close" class="drawer-close" type="button" aria-label="Fechar menu">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
-    <nav id="section-nav-links" class="section-nav-links" aria-label="Navegacao das secoes"></nav>
+    <nav id="section-nav-links" class="section-nav-links" aria-label="Navegação das seções"></nav>
   </aside>
   <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
 
@@ -44,8 +49,8 @@
       <div class="container">
         <section class="welcome-hero text-center">
           <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Bem-vindo(a)</p>
-          <h1 class="mb-2">Cha de Panela</h1>
-          <p class="mb-3">Escolha uma secao abaixo para ir direto aos presentes.</p>
+          <h1 class="mb-2">Chá de Panela</h1>
+          <p class="mb-3">Escolha uma seção abaixo para ir direto aos presentes.</p>
           <a class="welcome-enter" href="#lista-presentes">
             <i class="fa-solid fa-gift me-2"></i>Entrar na lista
           </a>
@@ -57,11 +62,12 @@
     <section id="lista-presentes" class="gift-page py-5">
       <div class="container">
         <div class="page-head text-center mx-auto mb-4">
-          <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Cha de Panela</p>
+          <p class="head-kicker mb-2"><i class="fa-solid fa-heart"></i> Chá de Panela</p>
           <h1 class="mb-2">Lista de Presentes</h1>
-          <p class="mb-0">Escolha um item e clique em reservar. Com a API ligada, o status fica sincronizado para todos.</p>
+          <p class="mb-0">Escolha um item e clique em reservar. Com a API ligada, o status fica sincronizado para todos.
+          </p>
         </div>
-                <!--
+        <!--
                   Cards de presentes ficam aqui, direto no HTML.
                   Para adicionar novo item, duplique um card existente e altere:
                   - .gift-title (nome)
@@ -73,446 +79,788 @@
                   <script type="application/json" class="item-links-data">[{"label":"Amazon","url":"https://seu-link-aqui.com"}]</script>
                 -->
         <div id="gift-sections">
-      <section id="cozinha" class="gift-group" data-section-title="Cozinha" data-section-icon="fa-utensils">
-        <h2 class="group-title"><i class="fa-solid fa-utensils"></i>Cozinha</h2>
-        <div class="row g-4">
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-kit-panelas-tramontina" data-item-name="Kit panelas Tramontina fundo triplo" data-item-description="Conjunto de panelas em aco inox para uso diario." data-item-image="img/panelas de indução.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/panelas de indução.jpeg" alt="Kit panelas Tramontina fundo triplo" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+          <section id="cozinha" class="gift-group" data-section-title="Cozinha" data-section-icon="fa-utensils">
+            <h2 class="group-title"><i class="fa-solid fa-utensils"></i>Cozinha</h2>
+            <div class="row g-4">
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-kit-panelas-tramontina"
+                  data-item-name="Kit panelas Tramontina fundo triplo"
+                  data-item-description="Conjunto de panelas em aço inox para uso diário."
+                  data-item-image="img/panelas de indução.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/panelas de indução.jpeg"
+                      alt="Kit panelas Tramontina fundo triplo" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Kit panelas Tramontina fundo triplo</h3>
+                    <p class="gift-description">Conjunto de panelas em aço inox para uso diário.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-kit-panelas-tramontina">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{"label":"Amazon","url":"https://www.amazon.com.br/dp/B0F2BC8RVT?ref=cm_sw_r_cso_wa_mwn_dp_ENRTWYHDN64QN8AMZ8SV_1&ref_=cm_sw_r_cso_wa_mwn_dp_ENRTWYHDN64QN8AMZ8SV_1&social_share=cm_sw_r_cso_wa_mwn_dp_ENRTWYHDN64QN8AMZ8SV_1"}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Kit panelas Tramontina fundo triplo</h3>
-                <p class="gift-description">Conjunto de panelas em aco inox para uso diario.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-kit-panelas-tramontina">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{"label":"Amazon","url":"https://www.amazon.com.br/dp/B0F2BC8RVT?ref=cm_sw_r_cso_wa_mwn_dp_ENRTWYHDN64QN8AMZ8SV_1&ref_=cm_sw_r_cso_wa_mwn_dp_ENRTWYHDN64QN8AMZ8SV_1&social_share=cm_sw_r_cso_wa_mwn_dp_ENRTWYHDN64QN8AMZ8SV_1"}]</script>
+
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-faqueiro-tramontina"
+                  data-item-name="2 kits de talheres Tramontina"
+                  data-item-description="Faqueiro 16 peças - linha Laguna." data-item-image="img/talheres.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/talheres.jpeg" alt="2 kits de talheres Tramontina" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">2 kits de talheres Tramontina</h3>
+                    <p class="gift-description">Faqueiro 16 peças - linha Laguna.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-faqueiro-tramontina">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/0ftguzeU&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-faqueiro-tramontina" data-item-name="2 kits de talheres Tramontina" data-item-description="Faqueiro 16 pecas - linha Laguna." data-item-image="img/talheres.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/talheres.jpeg" alt="2 kits de talheres Tramontina" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-mixer-elgin"
+                  data-item-name="Mixer Power Inox 3 em 1 600W Elgin Lunar"
+                  data-item-description="Mixer para uso diário." data-item-image="img/mixer.webp">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/mixer.webp" alt="mixer elgin" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Mixer Power Inox 3 em 1 600W Elgin Lunar</h3>
+                    <p class="gift-description">Mixer para uso diário.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-mixer-elgin">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://www.mercadolivre.com.br/mixer-power-inox-3-em-1-600w-elgin-lunar-/p/MLB40003206?pdp_filters=item_id%3AMLB6203765406&amp;matt_tool=38524122#origin=share&amp;sid=share&amp;wid=MLB6203765406&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">2 kits de talheres Tramontina</h3>
-                <p class="gift-description">Faqueiro 16 pecas - linha Laguna.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-faqueiro-tramontina">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/0ftguzeU&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-assadeiras-tramontina"
+                  data-item-name="Jogo de Assadeiras Tramontina"
+                  data-item-description="Jogo de assadeiras antiaderente Tramontina."
+                  data-item-image="img/assadeiras-tramontina.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/jogo de assadeiras.jpg" alt="Jogo de Assadeiras Tramontina" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Jogo de Assadeiras Tramontina</h3>
+                    <p class="gift-description">Jogo de assadeiras antiaderente Tramontina.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-assadeiras-tramontina">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Assadeiras-Tramontina-Antiaderente-Starflon-Mocaccino/dp/B0FL817P5G/ref=asc_df_B0FL817P5G?mcid=944a1d88ae6d3a6ba4dfdf1ac2dbae9b&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709964506262&amp;hvpos=&amp;hvnetw=g&amp;hvrand=15957686529510358761&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-2439648529100&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-porta-talheres" data-item-name="Porta talheres" data-item-description="Organizador para manter os talheres separados." data-item-image="img/porta talher.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/porta talher.jpeg" alt="Porta talheres" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-cortador-multifuncional"
+                  data-item-name="Cortador Multifuncional de Legumes"
+                  data-item-description="Cortador e fatiador multifuncional para legumes."
+                  data-item-image="img/cortador-multifuncional.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/ralador.jpg"
+                      alt="Cortador Multifuncional de Legumes" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Cortador Multifuncional de Legumes</h3>
+                    <p class="gift-description">Cortador e fatiador multifuncional para legumes.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-cortador-multifuncional">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Cortador-Multifuncional-Fatiador-Verduras-legumes/dp/B09MWJ6T6B/ref=asc_df_B09MWJ6T6B?mcid=4819d114d86d34458d44a7f1dbc3f54d&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709964506241&amp;hvpos=&amp;hvnetw=g&amp;hvrand=17412982914332754503&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-1638076713989&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Porta talheres</h3>
-                <p class="gift-description">Organizador para manter os talheres separados.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-porta-talheres">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/9zsCWndpII&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-kit-facas-tramontina"
+                  data-item-name="Kit de Facas Tramontina Plenus"
+                  data-item-description="Jogo de facas com 9 peças Tramontina."
+                  data-item-image="img/kit-facas-tramontina.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/faqueiro.jpg" alt="Kit de Facas Tramontina Plenus" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Kit de Facas Tramontina Plenus</h3>
+                    <p class="gift-description">Jogo de facas com 9 peças Tramontina.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-kit-facas-tramontina">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Facas-Peças-Tramontina-Plenus-23498015/dp/B0772XQ7XQ/ref=asc_df_B0772XQ7XQ?mcid=aba97ae314423e7f8bc559106ddd4ec3&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709964506220&amp;hvpos=&amp;hvnetw=g&amp;hvrand=10089252340109686116&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-810029703099&amp;language=pt_BR&amp;gad_source=1&amp;th=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-porta-temperos" data-item-name="Porta temperos" data-item-description="Suporte para organizar os temperos da cozinha." data-item-image="img/porta temperos.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/porta temperos.jpeg" alt="Porta temperos" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-assadeiras-vidro-marinex"
+                  data-item-name="Jogo 3 Assadeiras de Vidro Marinex"
+                  data-item-description="Jogo com 3 assadeiras retangulares de vidro."
+                  data-item-image="img/assadeiras-vidro-marinex.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/assadeira vidro.webp"
+                      alt="Jogo 3 Assadeiras de Vidro Marinex" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Jogo 3 Assadeiras de Vidro Marinex</h3>
+                    <p class="gift-description">Jogo com 3 assadeiras retangulares de vidro.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-assadeiras-vidro-marinex">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://produto.mercadolivre.com.br/MLB-3490730313-jogo-3-assadeiras-retangulares-vidro-celebrity-marinex-nadir-_JM?matt_tool=48995110&amp;matt_internal_campaign_id=&amp;matt_word=&amp;matt_source=google&amp;matt_campaign_id=22603531562&amp;matt_ad_group_id=181244933895&amp;matt_match_type=&amp;matt_network=g&amp;matt_device=c&amp;matt_creative=758138322200&amp;matt_keyword=&amp;matt_ad_position=&amp;matt_ad_type=pla&amp;matt_merchant_id=316527768&amp;matt_product_id=MLB3490730313&amp;matt_product_partition_id=2429959781261&amp;matt_target_id=pla-2429959781261&amp;cq_src=google_ads&amp;cq_cmp=22603531562&amp;cq_net=g&amp;cq_plt=gp&amp;cq_med=pla&amp;gad_source=1&amp;gad_campaignid=22603531562&amp;gclid=Cj0KCQiAk6rNBhCxARIsAN5mQLsM2JIKG8saxrOG6OE1N2hKGCOuIq6jEBeQu54sE1bIBzSAT_zjC14aAuvJEALw_wcB&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Porta temperos</h3>
-                <p class="gift-description">Suporte para organizar os temperos da cozinha.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-porta-temperos">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/1LaEJaA2Gf&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-chaleira-eletrica-inox"
+                  data-item-name="Chaleira Elétrica Inox"
+                  data-item-description="Chaleira elétrica inox com desligamento automático."
+                  data-item-image="img/chaleira-eletrica.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/chaleira.jpg" alt="Chaleira Elétrica Inox" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Chaleira Elétrica Inox</h3>
+                    <p class="gift-description">Chaleira elétrica inox com desligamento automático.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-chaleira-eletrica-inox">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Chaleira-Elétrica-Inox-Desligamento-Automatico/dp/B0D2S1VBQP?source=ps-sl-shoppingads-lpcontext&amp;ref_=fplfs&amp;psc=1&amp;smid=A35R8UXFI08064&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-organizador-armario-branco" data-item-name="2 organizadores de armario branco" data-item-description="Organizadores para armario/cozinha na cor branca." data-item-image="img/porta temperos.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/organizador de armário.jpeg" alt="2 organizadores de armario branco" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-fervedor-leiteira"
+                  data-item-name="Fervedor Leiteira Antiaderente"
+                  data-item-description="Fervedor leiteira antiaderente para cozinha."
+                  data-item-image="img/fervedor-leiteira.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/leitera.jpg" alt="Fervedor Leiteira Antiaderente" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Fervedor Leiteira Antiaderente</h3>
+                    <p class="gift-description">Fervedor leiteira antiaderente para cozinha.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-fervedor-leiteira">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Fervedor-Leiteira-Magnific-Grafite-Antiaderente/dp/B0849N1B7V/ref=asc_df_B0849N1B7V?mcid=962848d36a783b64ac6f79ffead6d202&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709886750320&amp;hvpos=&amp;hvnetw=g&amp;hvrand=12050686206830997229&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-917140433645&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">2 organizadores de armario branco</h3>
-                <p class="gift-description">Organizadores para armario/cozinha na cor branca.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-organizador-armario-branco">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/1LaEJP5bwQ&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-abridor-latas-manual"
+                  data-item-name="Abridor de Latas Manual Premium"
+                  data-item-description="Abridor de latas manual multiuso."
+                  data-item-image="img/abridor-latas.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/abridor.jpg" alt="Abridor de Latas Manual Premium" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Abridor de Latas Manual Premium</h3>
+                    <p class="gift-description">Abridor de latas manual multiuso.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-abridor-latas-manual">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Abridor-Latas-Manual-Multiuso-Premium/dp/B0FJZVGF7Z/ref=asc_df_B0FJZVGF7Z?mcid=95f81b1fb5bb30ed892e5d6eb7166f52&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709964506217&amp;hvpos=&amp;hvnetw=g&amp;hvrand=6471456643659055347&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-2441336096601&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-jarra-vidro" data-item-name="Jarra de vidro" data-item-description="Jarra para agua e sucos." data-item-image="img/jara de vidro.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/jara de vidro.jpeg" alt="Jarra de vidro" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-forma-pizza-redonda"
+                  data-item-name="Forma de Pizza Redonda Antiaderente"
+                  data-item-description="Assadeira redonda antiaderente para pizza."
+                  data-item-image="img/forma-pizza-redonda.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/forma.jpg"
+                      alt="Forma de Pizza Redonda Antiaderente" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Forma de Pizza Redonda Antiaderente</h3>
+                    <p class="gift-description">Assadeira redonda antiaderente para pizza.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-forma-pizza-redonda">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Forma-Pizza-Assadeira-Antiaderente-Redonda/dp/B0DTJCBK7B/ref=asc_df_B0DTJCBK7B?mcid=cfec6febad5e33819fb31fad0b52106b&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709964506262&amp;hvpos=&amp;hvnetw=g&amp;hvrand=13413161851319178760&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-2399234082202&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Jarra de vidro</h3>
-                <p class="gift-description">Jarra para agua e sucos.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-jarra-vidro">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon - Opcao 1&quot;,&quot;url&quot;:&quot;https://a.co/d/04jEs7ut&quot;},{&quot;label&quot;:&quot;Amazon - Opcao 2&quot;,&quot;url&quot;:&quot;https://a.co/d/03YbddNm&quot;},{&quot;label&quot;:&quot;Amazon - Opcao 3&quot;,&quot;url&quot;:&quot;https://a.co/d/0hKJC8xk&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-abridor-furador-vinho"
+                  data-item-name="Abridor e Furador de Vinho"
+                  data-item-description="Abridor/furador profissional portatil para vinho."
+                  data-item-image="img/abridor-furador-vinho.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/abridor de coco.jpg"
+                      alt="Abridor e Furador de Vinho" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Abridor e Furador de coco</h3>
+                    <p class="gift-description">Abridor/furador profissional portatil para coco.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-abridor-furador-vinho">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Abridor-Furador-Perfurador-Profissional-Portátil/dp/B0GMT2HDS1/ref=asc_df_B0GMT2HDS1?mcid=35e4a9ca1a2234fdb5143621975d079b&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709964506217&amp;hvpos=&amp;hvnetw=g&amp;hvrand=10288705829566888520&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-2471979542071&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-espremedor" data-item-name="Espremedor" data-item-description="Espremedor para frutas." data-item-image="img/jara de vidro.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/espremedor.jpg" alt="Espremedor" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-tabua-corte-inox"
+                  data-item-name="Tábua de Corte Dupla Face Inox"
+                  data-item-description="Tábua de corte dupla face em aço inox."
+                  data-item-image="img/tabua-corte-inox.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/tabua.webp" alt="Tábua de Corte Dupla Face Inox" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Tábua de Corte Dupla Face Inox</h3>
+                    <p class="gift-description">Tábua de corte dupla face em aço inox.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-tabua-corte-inox">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://www.mercadolivre.com.br/tabua-de-corte-saudavel-pp-aco-inox-para-cortar-dupla-face/up/MLBU3118686696?pdp_filters=item_id%3AMLB4027938361&amp;from=gshop&amp;matt_tool=55774197&amp;matt_internal_campaign_id=354729759&amp;matt_word=&amp;matt_source=google&amp;matt_campaign_id=23048606142&amp;matt_ad_group_id=187943158523&amp;matt_match_type=&amp;matt_network=g&amp;matt_device=c&amp;matt_creative=783061096244&amp;matt_keyword=&amp;matt_ad_position=&amp;matt_ad_type=pla&amp;matt_merchant_id=5570708630&amp;matt_product_id=MLBU3118686696&amp;matt_product_partition_id=2448609633773&amp;matt_target_id=pla-2448609633773&amp;cq_src=google_ads&amp;cq_cmp=23048606142&amp;cq_net=g&amp;cq_plt=gp&amp;cq_med=pla&amp;gad_source=1&amp;gad_campaignid=23048606142&amp;gclid=Cj0KCQiAk6rNBhCxARIsAN5mQLszpwo3GKoR4pYh6xU61TJK6lurnnGra1iVRlsoZjSAOzpADz_96csaAviBEALw_wcB&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Espremedor</h3>
-                <p class="gift-description">Espremedor para frutas.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-espremedor">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/0dA9lPM9&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-tabua-magica-descongelar"
+                  data-item-name="Tábua Mágica para Descongelar"
+                  data-item-description="Tábua para descongelar alimentos na cozinha."
+                  data-item-image="img/tabua-magica">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/tabua pra descongelar.jpg" alt="Tábua Mágica para Descongelar" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Tábua Mágica para Descongelar</h3>
+                    <p class="gift-description">Tábua para descongelar alimentos na cozinha.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-tabua-magica-descongelar">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Tabua-Mágica-Descongelar-Alimentos-Cozinha/dp/B082BG2RYW/ref=asc_df_B082BG2RYW?mcid=4b35826f54143ec59dd5f30dc10e3fa2&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709876289439&amp;hvpos=&amp;hvnetw=g&amp;hvrand=18370319008152604497&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-880414054014&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-liquidificador" data-item-name="Liquidificador" data-item-description="Liquidificador para uso diario." data-item-image="img/multiprocessador.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/multiprocessador.jpeg" alt="Liquidificador" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-porta-talheres" data-item-name="Porta talheres"
+                  data-item-description="Organizador para manter os talheres separados."
+                  data-item-image="img/porta talher.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/porta talher.jpeg" alt="Porta talheres" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Porta talheres</h3>
+                    <p class="gift-description">Organizador para manter os talheres separados.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-porta-talheres">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/9zsCWndpII&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Liquidificador</h3>
-                <p class="gift-description">Liquidificador para uso diario.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-liquidificador">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/18CAQWz&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-porta-temperos" data-item-name="Porta temperos"
+                  data-item-description="Suporte para organizar os temperos da cozinha."
+                  data-item-image="img/porta temperos.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/porta temperos.jpeg" alt="Porta temperos" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Porta temperos</h3>
+                    <p class="gift-description">Suporte para organizar os temperos da cozinha.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-porta-temperos">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/1LaEJaA2Gf&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-batedeira" data-item-name="Batedeira" data-item-description="Batedeira para massas e receitas doces." data-item-image="img/batedeira.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/batedeira.jpeg" alt="Batedeira" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-organizador-armario-branco"
+                  data-item-name="2 organizadores de armario branco"
+                  data-item-description="Organizadores para armario/cozinha na cor branca."
+                  data-item-image="img/porta temperos.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/organizador de armário.jpeg"
+                      alt="2 organizadores de armario branco" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">2 organizadores de armario branco</h3>
+                    <p class="gift-description">Organizadores para armario/cozinha na cor branca.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-organizador-armario-branco">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/1LaEJP5bwQ&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Batedeira</h3>
-                <p class="gift-description">Batedeira para massas e receitas doces.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-batedeira">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre - Opcao 1&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1LpEt9B&quot;},{&quot;label&quot;:&quot;Mercado Livre - Opcao 2&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/31AFWF1&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-jarra-vidro" data-item-name="Jarra de vidro"
+                  data-item-description="Jarra para água e sucos." data-item-image="img/jara de vidro.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/jara de vidro.jpeg" alt="Jarra de vidro" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Jarra de vidro</h3>
+                    <p class="gift-description">Jarra para água e sucos.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-jarra-vidro">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon - Opção 1&quot;,&quot;url&quot;:&quot;https://a.co/d/04jEs7ut&quot;},{&quot;label&quot;:&quot;Amazon - Opção 2&quot;,&quot;url&quot;:&quot;https://a.co/d/03YbddNm&quot;},{&quot;label&quot;:&quot;Amazon - Opção 3&quot;,&quot;url&quot;:&quot;https://a.co/d/0hKJC8xk&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-potes-hermeticos" data-item-name="Potes hermeticos" data-item-description="Conjunto para armazenar alimentos." data-item-image="img/potes organizadores de lavanderia.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/potes.jpeg" alt="Potes hermeticos" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-potes-hermeticos" data-item-name="Potes hermeticos"
+                  data-item-description="Conjunto para armazenar alimentos."
+                  data-item-image="img/potes organizadores de lavanderia.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/potes.jpeg" alt="Potes hermeticos" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Potes hermeticos</h3>
+                    <p class="gift-description">Conjunto para armazenar alimentos.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-potes-hermeticos">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Shopee - Opção 1&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/6pvFnomPj1&quot;},{&quot;label&quot;:&quot;Shopee - Opção 2&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/50TbdBWPbN&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Potes hermeticos</h3>
-                <p class="gift-description">Conjunto para armazenar alimentos.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-potes-hermeticos">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Shopee - Opcao 1&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/6pvFnomPj1&quot;},{&quot;label&quot;:&quot;Shopee - Opcao 2&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/50TbdBWPbN&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-tacas-agua" data-item-name="Taças para água"
+                  data-item-description="Jogo de taças para água." data-item-image="img/taças para água.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/taças para água.jpeg" alt="Taças para água" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Taças para água</h3>
+                    <p class="gift-description">Jogo de taças para água.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-tacas-agua">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/AABgqU9gY7&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-tacas-agua" data-item-name="Tacas para agua" data-item-description="Jogo de tacas para agua." data-item-image="img/taças para água.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/taças para água.jpeg" alt="Tacas para agua" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-lixo-grande" data-item-name="Lixo grande cozinha"
+                  data-item-description="Lixeira grande para cozinha." data-item-image="img/lixeira.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/lixeira.jpeg" alt="Lixo grande cozinha" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Lixo grande cozinha</h3>
+                    <p class="gift-description">Lixeira grande para cozinha.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-lixo-grande">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/09MRTp7g&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Tacas para agua</h3>
-                <p class="gift-description">Jogo de tacas para agua.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-tacas-agua">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/AABgqU9gY7&quot;}]</script>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-lixo-pequeno-bege"
+                  data-item-name="Lixo pequeno cozinha bege" data-item-description="Lixeira pequena para pia/apoio."
+                  data-item-image="img/lixeira2.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/lixeira2.jpeg" alt="Lixo pequeno cozinha bege" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Lixo pequeno cozinha bege</h3>
+                    <p class="gift-description">Lixeira pequena para pia/apoio.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-lixo-pequeno-bege">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Havan&quot;,&quot;url&quot;:&quot;https://www.havan.com.br/lixeira-trium-ou-4-7-litros-bege/p?utm_source=share&quot;}]</script>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-lixo-grande" data-item-name="Lixo grande cozinha" data-item-description="Lixeira grande para cozinha." data-item-image="img/lixeira.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/lixeira.jpeg" alt="Lixo grande cozinha" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
+              <div class="col-sm-6 col-lg-3">
+                <article class="gift-card" data-item-id="coz-multiprocessador"
+                  data-item-name="Multiprocessador Philco 1000W 12 em 1 All In One Maximus"
+                  data-item-description="Multiprocessador Philco 1000W 12 em 1 All In One Maximus."
+                  data-item-image="img/multiprocessador.jpeg">
+                  <div class="gift-image-wrap">
+                    <img class="gift-image" src="img/multiprocessador.jpeg"
+                      alt="Multiprocessador Philco 1000W 12 em 1 All In One Maximus" />
+                    <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                  </div>
+                  <div class="gift-body">
+                    <h3 class="gift-title">Multiprocessador Philco 1000W 12 em 1 All In One Maximus</h3>
+                    <p class="gift-description">Multiprocessador Philco 1000W 12 em 1 All In One Maximus.</p>
+                    <button class="btn-reserve reserve" data-reserve="coz-multiprocessador">
+                      <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                    </button>
+                    <script type="application/json"
+                      class="item-links-data">[{&quot;label&quot;:&quot;Magalu&quot;,&quot;url&quot;:&quot;https://m.magazineluiza.com.br/multiprocessador-philco-1000w-12-em-1-all-in-one-maximus/p/hfke1edaj2/ep/prsa/?partner_id=64853&amp;utm_source=pdp_desk&amp;utm_medium=share&quot;}]</script>
+                  </div>
+                </article>
               </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Lixo grande cozinha</h3>
-                <p class="gift-description">Lixeira grande para cozinha.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-lixo-grande">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/09MRTp7g&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-lixo-pequeno-bege" data-item-name="Lixo pequeno cozinha bege" data-item-description="Lixeira pequena para pia/apoio." data-item-image="img/lixeira2.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/lixeira2.jpeg" alt="Lixo pequeno cozinha bege" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Lixo pequeno cozinha bege</h3>
-                <p class="gift-description">Lixeira pequena para pia/apoio.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-lixo-pequeno-bege">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Havan&quot;,&quot;url&quot;:&quot;https://www.havan.com.br/lixeira-trium-ou-4-7-litros-bege/p?utm_source=share&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="coz-multiprocessador" data-item-name="Multiprocessador Philco 1000W 12 em 1 All In One Maximus" data-item-description="Multiprocessador Philco 1000W 12 em 1 All In One Maximus." data-item-image="img/multiprocessador.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/multiprocessador.jpeg" alt="Multiprocessador Philco 1000W 12 em 1 All In One Maximus" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Multiprocessador Philco 1000W 12 em 1 All In One Maximus</h3>
-                <p class="gift-description">Multiprocessador Philco 1000W 12 em 1 All In One Maximus.</p>
-                <button class="btn-reserve reserve" data-reserve="coz-multiprocessador">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Magalu&quot;,&quot;url&quot;:&quot;https://m.magazineluiza.com.br/multiprocessador-philco-1000w-12-em-1-all-in-one-maximus/p/hfke1edaj2/ep/prsa/?partner_id=64853&amp;utm_source=pdp_desk&amp;utm_medium=share&quot;}]</script>
-              </div>
-            </article>
-          </div>
-         
-            
-      <section id="limpeza" class="gift-group" data-section-title="Limpeza e Lavanderia" data-section-icon="fa-pump-soap">
-        <h2 class="group-title"><i class="fa-solid fa-pump-soap"></i>Limpeza e Lavanderia</h2>
-        <div class="row g-4">
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="lim-aspirador-philco" data-item-name="Aspirador de po Philco" data-item-description="Opcao de aspirador para casa." data-item-image="img/aspirador.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/aspirador.jpeg" alt="Aspirador de po Philco" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Aspirador de po Philco</h3>
-                <p class="gift-description">Opcao de aspirador para casa.</p>
-                <button class="btn-reserve reserve" data-reserve="lim-aspirador-philco">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/2xAszsc&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="lim-kit-limpeza" data-item-name="Kit limpeza" data-item-description="Kit com vassoura com cabo e pazinha para limpeza geral." data-item-image="img/pá e mini vassoura.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/pá e mini vassoura.jpeg" alt="Kit limpeza" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Kit limpeza</h3>
-                <p class="gift-description">Kit com vassoura com cabo e pazinha para limpeza geral.</p>
-                <button class="btn-reserve reserve" data-reserve="lim-kit-limpeza">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Shopee - Vassoura com cabo&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/AKV1owopVd&quot;},{&quot;label&quot;:&quot;Mercado Livre - Pazinha&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1aLTawP&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="lim-rodo" data-item-name="Rodo" data-item-description="Rodo para piso." data-item-image="img/rodo.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/rodo.jpeg" alt="Rodo" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Rodo</h3>
-                <p class="gift-description">Rodo para piso.</p>
-                <button class="btn-reserve reserve" data-reserve="lim-rodo">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/2yywKzQ&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="lim-dispenser-lavanderia" data-item-name="Kit 3 dispenser lavanderia" data-item-description="Dispenser para sabao/amaciante." data-item-image="img/potes organizadores de lavanderia.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/potes organizadores de lavanderia.jpeg" alt="Kit 3 dispenser lavanderia" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Kit 3 dispenser lavanderia</h3>
-                <p class="gift-description">Dispenser para sabao/amaciante.</p>
-                <button class="btn-reserve reserve" data-reserve="lim-dispenser-lavanderia">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/8AQYKWpxup&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="lim-pano-microfibra" data-item-name="Panos de microfibra" data-item-description="Panos para limpeza delicada." data-item-image="img/panos de microfriba.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/panos de microfriba.jpeg" alt="Panos de microfibra" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Panos de microfibra</h3>
-                <p class="gift-description">Panos para limpeza delicada.</p>
-                <button class="btn-reserve reserve" data-reserve="lim-pano-microfibra">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon - Opcao 1&quot;,&quot;url&quot;:&quot;https://a.co/d/00IiT2e2&quot;},{&quot;label&quot;:&quot;Shopee - Opcao 2&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/4fqmwUTj3u&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="lim-pano-chao" data-item-name="Pano de chao" data-item-description="Pano para limpeza pesada." data-item-image="img/panos de chão.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/panos de chão.jpeg" alt="Pano de chao" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Pano de chao</h3>
-                <p class="gift-description">Pano para limpeza pesada.</p>
-                <button class="btn-reserve reserve" data-reserve="lim-pano-chao">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/0gVQo7Pz&quot;}]</script>
-              </div>
-            </article>
-          </div>
+
+
+              <section id="limpeza" class="gift-group" data-section-title="Limpeza e Lavanderia"
+                data-section-icon="fa-pump-soap">
+                <h2 class="group-title"><i class="fa-solid fa-pump-soap"></i>Limpeza e Lavanderia</h2>
+                <div class="row g-4">
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="lim-aspirador-philco"
+                      data-item-name="Aspirador de po Philco" data-item-description="Opção de aspirador para casa."
+                      data-item-image="img/aspirador.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/aspirador.jpeg" alt="Aspirador de po Philco" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Aspirador de po Philco</h3>
+                        <p class="gift-description">Opção de aspirador para casa.</p>
+                        <button class="btn-reserve reserve" data-reserve="lim-aspirador-philco">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/2xAszsc&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="lim-kit-limpeza" data-item-name="Kit limpeza"
+                      data-item-description="Kit com vassoura com cabo e pazinha para limpeza geral."
+                      data-item-image="img/pá e mini vassoura.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/pá e mini vassoura.jpeg" alt="Kit limpeza" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Kit limpeza</h3>
+                        <p class="gift-description">Kit com vassoura com cabo e pazinha para limpeza geral.</p>
+                        <button class="btn-reserve reserve" data-reserve="lim-kit-limpeza">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Shopee - Vassoura com cabo&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/AKV1owopVd&quot;},{&quot;label&quot;:&quot;Mercado Livre - Pazinha&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1aLTawP&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="lim-rodo" data-item-name="Rodo"
+                      data-item-description="Rodo para piso." data-item-image="img/rodo.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/rodo.jpeg" alt="Rodo" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Rodo</h3>
+                        <p class="gift-description">Rodo para piso.</p>
+                        <button class="btn-reserve reserve" data-reserve="lim-rodo">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/2yywKzQ&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="lim-dispenser-lavanderia"
+                      data-item-name="Kit 3 dispenser lavanderia"
+                      data-item-description="Dispenser para sabao/amaciante."
+                      data-item-image="img/potes organizadores de lavanderia.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/potes organizadores de lavanderia.jpeg"
+                          alt="Kit 3 dispenser lavanderia" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Kit 3 dispenser lavanderia</h3>
+                        <p class="gift-description">Dispenser para sabao/amaciante.</p>
+                        <button class="btn-reserve reserve" data-reserve="lim-dispenser-lavanderia">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Shopee&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/8AQYKWpxup&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="lim-cesto-bambu-duplo"
+                      data-item-name="Cesto de bambu grande duplo com divisorias"
+                      data-item-description="Cesto para roupas sujas com divisorias."
+                      data-item-image="img/cesto-bambu.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/cesto de bamboo.webp"
+                          alt="Cesto de bambu grande duplo com divisorias" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Cesto de bambu grande duplo com divisorias</h3>
+                        <p class="gift-description">Cesto para roupas sujas com divisorias.</p>
+                        <button class="btn-reserve reserve" data-reserve="lim-cesto-bambu-duplo">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://www.mercadolivre.com.br/cesto-de-bambu-grande-duplo-com-divisorias-roupas-sujas-cor-marrom-claro/p/MLB38206775?pdp_filters=item_id%3AMLB4150073021&amp;matt_tool=38524122#origin=share&amp;sid=share&amp;wid=MLB4150073021&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="lim-pano-microfibra" data-item-name="Panos de microfibra"
+                      data-item-description="Panos para limpeza delicada."
+                      data-item-image="img/panos de microfriba.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/panos de microfriba.jpeg" alt="Panos de microfibra" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Panos de microfibra</h3>
+                        <p class="gift-description">Panos para limpeza delicada.</p>
+                        <button class="btn-reserve reserve" data-reserve="lim-pano-microfibra">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Amazon - Opção 1&quot;,&quot;url&quot;:&quot;https://a.co/d/00IiT2e2&quot;},{&quot;label&quot;:&quot;Shopee - Opção 2&quot;,&quot;url&quot;:&quot;https://s.shopee.com.br/4fqmwUTj3u&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="lim-pano-chao" data-item-name="Pano de chao"
+                      data-item-description="Pano para limpeza pesada." data-item-image="img/panos de chão.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/panos de chão.jpeg" alt="Pano de chao" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Pano de chao</h3>
+                        <p class="gift-description">Pano para limpeza pesada.</p>
+                        <button class="btn-reserve reserve" data-reserve="lim-pano-chao">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/0gVQo7Pz&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </section>
+              <section id="banheiro" class="gift-group" data-section-title="Banheiro" data-section-icon="fa-bath">
+                <h2 class="group-title"><i class="fa-solid fa-bath"></i>Banheiro</h2>
+                <div class="row g-4">
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="ban-toalha-rosto-buddemeyer"
+                      data-item-name="2 toalhas de rosto Buddemeyer"
+                      data-item-description="Toalhas de rosto Buddemeyer (amarelo manteiga, azul bebe ou cinza)."
+                      data-item-image="img/toalhas de banho.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/toalhas de banho.jpeg" alt="2 toalhas de rosto Buddemeyer" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">2 toalhas de rosto Buddemeyer</h3>
+                        <p class="gift-description">Toalhas de rosto Buddemeyer (amarelo manteiga, azul bebe ou cinza).
+                        </p>
+                        <button class="btn-reserve reserve" data-reserve="ban-toalha-rosto-buddemeyer">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1zMgseM&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="ban-toalhas-banho"
+                      data-item-name="Toalhas de banho"
+                      data-item-description="Toalhas de banho (compra de sua escolha)."
+                      data-item-image="img/toalhas-banho.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/toalhas de banho.webp" alt="Toalhas de banho" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Toalhas de banho</h3>
+                        <p class="gift-description">Toalhas de banho (compra de sua escolha).</p>
+                        <button class="btn-reserve reserve" data-reserve="ban-toalhas-banho">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json" class="item-links-data">[]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="ban-porta-escova-dente"
+                      data-item-name="Porta Escova de Dente"
+                      data-item-description="Porta escova de dente para banheiro."
+                      data-item-image="img/esterilizador-facas.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/porta escovas.jpg" alt="Porta Escova de Dente" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Porta Escova de Dente</h3>
+                        <p class="gift-description">Porta escova de dente para banheiro.</p>
+                        <button class="btn-reserve reserve" data-reserve="ban-porta-escova-dente">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://www.amazon.com.br/Esterilizador-Recarregamento-desinfecção-inteligente-recarregável/dp/B09ZXHRXS8/ref=asc_df_B09ZXHRXS8?mcid=d1abefa3c03f320d99ec71f03592c022&amp;tag=googleshopp00-20&amp;linkCode=df0&amp;hvadid=709968341275&amp;hvpos=&amp;hvnetw=g&amp;hvrand=710908663331347658&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9047826&amp;hvtargid=pla-1660862133088&amp;psc=1&amp;language=pt_BR&amp;gad_source=1&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="ban-lixeira-12l-inox"
+                      data-item-name="Lixeira banheiro 12L inox" data-item-description="Lixeira inox para banheiro."
+                      data-item-image="img/lixeira2.jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/lixeira2.jpeg" alt="Lixeira banheiro 12L inox" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Lixeira banheiro 12L inox</h3>
+                        <p class="gift-description">Lixeira inox para banheiro.</p>
+                        <button class="btn-reserve reserve" data-reserve="ban-lixeira-12l-inox">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/06eELxlv&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="ban-kit-tapetes" data-item-name="Kit tapetes de banheiro"
+                      data-item-description="Conjunto de tapetes para banheiro."
+                      data-item-image="img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/tapetes banheiro.webp"
+                          alt="Kit tapetes de banheiro" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Kit tapetes de banheiro</h3>
+                        <p class="gift-description">Conjunto de tapetes para banheiro.</p>
+                        <button class="btn-reserve reserve" data-reserve="ban-kit-tapetes">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json"
+                          class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre - Opção 1&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1jLYWM8&quot;},{&quot;label&quot;:&quot;Mercado Livre - Opção 2&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1LMBWVz&quot;},{&quot;label&quot;:&quot;Mercado Livre - Opção 3&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/25t5opF&quot;}]</script>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </section>
+              <section id="quarto" class="gift-group" data-section-title="Quarto" data-section-icon="fa-bed">
+                <h2 class="group-title"><i class="fa-solid fa-bed"></i>Quarto</h2>
+                <div class="row g-4">
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="qua-kit-casal-4pecas-cor-lisa"
+                      data-item-name="Kit casal 4 peças cor lisa"
+                      data-item-description="Conjunto para cama de casal (link em breve)."
+                      data-item-image="img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/Kit casal 4 peças cor lisa bege.jpeg"
+                          alt="Kit casal 4 peças cor lisa" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Kit casal 4 peças cor lisa</h3>
+                        <p class="gift-description">Conjunto para cama de casal (link em breve).</p>
+                        <button class="btn-reserve reserve" data-reserve="qua-kit-casal-4pecas-cor-lisa">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json" class="item-links-data">[]</script>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <article class="gift-card" data-item-id="qua-kit-casal-4pecas" data-item-name="Kit casal 4 peças"
+                      data-item-description="Outra opção de kit de cama casal (link em breve)."
+                      data-item-image="img/qua-kit-casal-4pecas">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/Kit casal 4 peças.jpeg" alt="Kit casal 4 peças" />
+                        <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponível</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Kit casal 4 peças</h3>
+                        <p class="gift-description">Outra opção de kit de cama casal (link em breve).</p>
+                        <button class="btn-reserve reserve" data-reserve="qua-kit-casal-4pecas">
+                          <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
+                        </button>
+                        <script type="application/json" class="item-links-data">[]</script>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </section>
+              <section id="pix" class="gift-group" data-section-title="Pix" data-section-icon="fa-qrcode">
+                <h2 class="group-title"><i class="fa-solid fa-qrcode"></i>Pix</h2>
+                <div class="row g-4">
+                  <div class="col-sm-6 col-lg-6">
+                    <article class="gift-card" data-item-id="pix-contribuicao"
+                      data-item-name="Contribuição via Pix"
+                      data-item-description="Caso nenhuma das opções acima tenha sido do seu agrado, você pode enviar um Pix com o valor desejado para esta chave (copia e cola): 54999268163"
+                      data-item-image="img/toalhas de banho.jpeg"
+                      data-item-modal-image="img/WhatsApp Image 2026-03-06 at 10.03.24.jpeg"
+                      data-pix-key="54999268163"
+                      data-reservable="false">
+                      <div class="gift-image-wrap">
+                        <img class="gift-image" src="img/pix.jpeg" alt="Pix" />
+                        <span class="reserve-tag"><i class="fa-solid fa-qrcode"></i>Pix</span>
+                      </div>
+                      <div class="gift-body">
+                        <h3 class="gift-title">Contribuição via Pix</h3>
+                        <p class="gift-description">
+                          Caso nenhuma das opções acima tenha sido do seu agrado, você pode enviar um Pix com o valor desejado para esta chave:
+                        </p>
+                        <p class="gift-description"><strong>CHAVE PIX (copia e cola): 54999268163</strong></p>
+                        <button class="item-link item-link-copy" type="button" data-copy-text="54999268163">
+                          <i class="fa-solid fa-copy"></i> Copiar chave Pix
+                        </button>
+                        <script type="application/json" class="item-links-data">[]</script>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </section>
+            </div>
         </div>
-      </section>
-      <section id="banheiro" class="gift-group" data-section-title="Banheiro" data-section-icon="fa-bath">
-        <h2 class="group-title"><i class="fa-solid fa-bath"></i>Banheiro</h2>
-        <div class="row g-4">
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="ban-chuveiro-eletrico" data-item-name="Chuveiro eletrico" data-item-description="Ducha eletrica para banheiro." data-item-image="img/cabo 2metros.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/cabo 2metros.jpeg" alt="Chuveiro eletrico" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Chuveiro eletrico</h3>
-                <p class="gift-description">Ducha eletrica para banheiro.</p>
-                <button class="btn-reserve reserve" data-reserve="ban-chuveiro-eletrico">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/0fASNxU0&quot;},{&quot;label&quot;:&quot;Magalu - Lorenzetti&quot;,&quot;url&quot;:&quot;https://m.magazineluiza.com.br/ducha-fashion-220v-6800w-branco-lorenzetti/p/ehkcjc9h3d/cj/duxx/?partner_id=64853&amp;utm_source=pdp_desk&amp;utm_medium=share&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="ban-toalha-rosto-buddemeyer" data-item-name="2 toalhas de rosto Buddemeyer" data-item-description="Toalhas de rosto Buddemeyer (amarelo manteiga, azul bebe ou cinza)." data-item-image="img/toalhas de banho.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/toalhas de banho.jpeg" alt="2 toalhas de rosto Buddemeyer" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">2 toalhas de rosto Buddemeyer</h3>
-                <p class="gift-description">Toalhas de rosto Buddemeyer (amarelo manteiga, azul bebe ou cinza).</p>
-                <button class="btn-reserve reserve" data-reserve="ban-toalha-rosto-buddemeyer">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1zMgseM&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="ban-lixeira-12l-inox" data-item-name="Lixeira banheiro 12L inox" data-item-description="Lixeira inox para banheiro." data-item-image="img/lixeira2.jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/lixeira2.jpeg" alt="Lixeira banheiro 12L inox" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Lixeira banheiro 12L inox</h3>
-                <p class="gift-description">Lixeira inox para banheiro.</p>
-                <button class="btn-reserve reserve" data-reserve="ban-lixeira-12l-inox">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Amazon&quot;,&quot;url&quot;:&quot;https://a.co/d/06eELxlv&quot;}]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="ban-kit-tapetes" data-item-name="Kit tapetes de banheiro" data-item-description="Conjunto de tapetes para banheiro." data-item-image="img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg" alt="Kit tapetes de banheiro" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Kit tapetes de banheiro</h3>
-                <p class="gift-description">Conjunto de tapetes para banheiro.</p>
-                <button class="btn-reserve reserve" data-reserve="ban-kit-tapetes">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[{&quot;label&quot;:&quot;Mercado Livre - Opcao 1&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1jLYWM8&quot;},{&quot;label&quot;:&quot;Mercado Livre - Opcao 2&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/1LMBWVz&quot;},{&quot;label&quot;:&quot;Mercado Livre - Opcao 3&quot;,&quot;url&quot;:&quot;https://mercadolivre.com/sec/25t5opF&quot;}]</script>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section id="quarto" class="gift-group" data-section-title="Quarto" data-section-icon="fa-bed">
-        <h2 class="group-title"><i class="fa-solid fa-bed"></i>Quarto</h2>
-        <div class="row g-4">
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="qua-kit-casal-4pecas-cor-lisa" data-item-name="Kit casal 4 pecas cor lisa" data-item-description="Conjunto para cama de casal (link em breve)." data-item-image="img/WhatsApp Image 2026-02-15 at 21.42.19 (2).jpeg">
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/Kit casal 4 pecas cor lisa bege.jpeg" alt="Kit casal 4 pecas cor lisa" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Kit casal 4 pecas cor lisa</h3>
-                <p class="gift-description">Conjunto para cama de casal (link em breve).</p>
-                <button class="btn-reserve reserve" data-reserve="qua-kit-casal-4pecas-cor-lisa">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[]</script>
-              </div>
-            </article>
-          </div>
-          <div class="col-sm-6 col-lg-3">
-            <article class="gift-card" data-item-id="qua-kit-casal-4pecas" data-item-name="Kit casal 4 pecas" data-item-description="Outra opcao de kit de cama casal (link em breve)." data-item-image="img/qua-kit-casal-4pecas"i? 
-            >
-              <div class="gift-image-wrap">
-                <img class="gift-image" src="img/Kit casal 4 pecas.jpeg" alt="Kit casal 4 pecas" />
-                <span class="reserve-tag"><i class="fa-solid fa-gift"></i>Disponivel</span>
-              </div>
-              <div class="gift-body">
-                <h3 class="gift-title">Kit casal 4 pecas</h3>
-                <p class="gift-description">Outra opcao de kit de cama casal (link em breve).</p>
-                <button class="btn-reserve reserve" data-reserve="qua-kit-casal-4pecas">
-                  <i class="fa-solid fa-calendar-check me-2"></i>Reservar item
-                </button>
-                <script type="application/json" class="item-links-data">[]</script>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-        </div>
-      </div>
     </section>
   </main>
 
@@ -549,14 +897,20 @@
   <footer class="site-footer py-3">
     <div class="flower-corners" aria-hidden="true">
       <div class="flower-bed left">
-        <div class="daisy" style="--x:6px; --size:42px; --h:56px; --delay:0s;"><span class="stem"></span><span class="bloom"></span></div>
-        <div class="daisy" style="--x:44px; --size:34px; --h:46px; --delay:.35s;"><span class="stem"></span><span class="bloom"></span></div>
-        <div class="daisy" style="--x:78px; --size:46px; --h:62px; --delay:.7s;"><span class="stem"></span><span class="bloom"></span></div>
+        <div class="daisy" style="--x:6px; --size:42px; --h:56px; --delay:0s;"><span class="stem"></span><span
+            class="bloom"></span></div>
+        <div class="daisy" style="--x:44px; --size:34px; --h:46px; --delay:.35s;"><span class="stem"></span><span
+            class="bloom"></span></div>
+        <div class="daisy" style="--x:78px; --size:46px; --h:62px; --delay:.7s;"><span class="stem"></span><span
+            class="bloom"></span></div>
       </div>
       <div class="flower-bed right">
-        <div class="daisy" style="--x:8px; --size:42px; --h:56px; --delay:.2s;"><span class="stem"></span><span class="bloom"></span></div>
-        <div class="daisy" style="--x:42px; --size:34px; --h:46px; --delay:.55s;"><span class="stem"></span><span class="bloom"></span></div>
-        <div class="daisy" style="--x:76px; --size:46px; --h:62px; --delay:.9s;"><span class="stem"></span><span class="bloom"></span></div>
+        <div class="daisy" style="--x:8px; --size:42px; --h:56px; --delay:.2s;"><span class="stem"></span><span
+            class="bloom"></span></div>
+        <div class="daisy" style="--x:42px; --size:34px; --h:46px; --delay:.55s;"><span class="stem"></span><span
+            class="bloom"></span></div>
+        <div class="daisy" style="--x:76px; --size:46px; --h:62px; --delay:.9s;"><span class="stem"></span><span
+            class="bloom"></span></div>
       </div>
     </div>
     <div class="container text-center">
@@ -566,4 +920,7 @@
 
   <script src="assets/js/script.js"></script>
 </body>
+
 </html>
+
+
