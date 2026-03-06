@@ -426,8 +426,8 @@ async function toggleRegularReservation(item) {
   const shouldReserve = !isReserved(item);
   const actorName = ensureActorName(
     shouldReserve
-      ? "Escreva uma frase para homenagear o casal e reservar este item:"
-      : "Para liberar, informe a mesma frase usada na reserva:",
+      ? "Escreva seu nome e uma frase para homenagear o casal:(obrigatório)"
+      : "Escreva seu nome e uma frase para homenagear o casal:(obrigatório)",
     true
   );
   if (!actorName) return;
@@ -757,5 +757,7 @@ document.addEventListener("click", async (event) => {
     alert("Não foi possível copiar automaticamente. Copie manualmente: " + textToCopy);
   }
 });
+
+
 
 
