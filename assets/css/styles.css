@@ -538,6 +538,59 @@ footer,
   cursor: pointer;
 }
 
+.tributes-cloud {
+  min-height: 220px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 2px;
+}
+
+.tributes-empty {
+  margin: 0;
+  color: #3d6f94;
+}
+
+.tribute-bubble {
+  max-width: min(100%, 280px);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(41, 86, 119, 0.16);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 16px rgba(41, 86, 119, 0.1);
+  animation-name: tributeFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  transform-origin: center;
+}
+
+.tribute-bubble p {
+  margin: 0;
+  color: #2c5f86;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.tribute-bubble small {
+  display: block;
+  margin-top: 6px;
+  color: #5a83a3;
+  font-weight: 700;
+}
+
+@keyframes tributeFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .gift-card[data-open-item] {
   cursor: pointer;
 }

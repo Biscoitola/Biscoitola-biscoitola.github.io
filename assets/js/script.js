@@ -9,6 +9,7 @@ const API_BASE_URL_META = document
   ?.trim();
 const API_BASE_URL = window.CHA_PANELA_API_BASE_URL || API_BASE_URL_META || "";
 const RESERVATION_REFRESH_MS = 15000;
+const TRIBUTES_REFRESH_MS = 20000;
 
 let reservationState = loadReservationState();
 let currentActorName = loadActorName();
@@ -32,6 +33,7 @@ const drawerClose = document.getElementById("drawer-close");
 const drawerBackdrop = document.getElementById("drawer-backdrop");
 const sectionNavLinks = document.getElementById("section-nav-links");
 const welcomeButtons = document.getElementById("welcome-buttons");
+const tributesCloud = document.getElementById("tributes-cloud");
 
 let itemMap = {};
 
@@ -160,11 +162,15 @@ function getReserveButtonState(item) {
 function ensureActorName(promptMessage, forceAsk = false) {
   if (!forceAsk && currentActorName) return currentActorName;
 
-  const typed = window.prompt(promptMessage || "Digite seu nome para reservar itens:", currentActorName || "") || "";
+  const typed =
+    window.prompt(
+      promptMessage || "Escreva uma frase para homenagear o casal:",
+      currentActorName || ""
+    ) || "";
   const normalized = normalizeActorName(typed);
 
   if (!normalized) {
-    alert("Informe seu nome para continuar.");
+    alert("Escreva uma frase para continuar.");
     return null;
   }
 
@@ -419,7 +425,9 @@ async function toggleRegularReservation(item) {
 
   const shouldReserve = !isReserved(item);
   const actorName = ensureActorName(
-    shouldReserve ? "Digite seu nome para reservar este item:" : "Digite seu nome para liberar este item:",
+    shouldReserve
+      ? "Escreva uma frase para homenagear o casal e reservar este item:"
+      : "Para liberar, informe a mesma frase usada na reserva:",
     true
   );
   if (!actorName) return;
@@ -472,13 +480,14 @@ async function toggleRegularReservation(item) {
             currentActorPin = recoveryPin;
             localStorage.setItem(USER_PIN_STORAGE_KEY, recoveryPin);
             await loadReservationsFromApi({ silent: true });
+            await loadTributesFromApi({ silent: true });
             return;
           } catch (retryError) {
             if (retryError.status === 403) {
-              alert("Nome inválido ou reserva pertence a outra pessoa.");
+              alert("Frase inválida ou reserva pertence a outra pessoa.");
             } else {
-              console.error("Falha ao recuperar liberação por nome.", retryError);
-              alert("Não foi possível validar seu nome agora. Tente novamente.");
+              console.error("Falha ao recuperar liberação por frase.", retryError);
+              alert("Não foi possível validar sua frase agora. Tente novamente.");
             }
           }
         }
@@ -491,7 +500,7 @@ async function toggleRegularReservation(item) {
       alert(shouldReserve ? "Este item acabou de ser reservado por outra pessoa." : "Este item já estava disponivel.");
     } else if (error.status === 400) {
       if (error.payload?.error === "actor_pin_required") {
-        alert("Informe seu nome para reservar.");
+        alert("Escreva uma frase para reservar.");
       } else {
         alert("Informe seus dados para continuar.");
       }
@@ -587,6 +596,69 @@ function buildNavigationUi() {
   });
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function renderTributes(messages = []) {
+  if (!tributesCloud) return;
+
+  const normalized = (messages || [])
+    .map((message) => ({
+      text: normalizeActorName(message.message || message.actor_name || ""),
+      itemName: normalizeActorName(message.item_name || itemMap[message.item_id]?.name || "")
+    }))
+    .filter((message) => message.text);
+
+  if (normalized.length === 0) {
+    tributesCloud.innerHTML =
+      '<p class="tributes-empty">As homenagens aparecerão aqui conforme as reservas forem feitas.</p>';
+    return;
+  }
+
+  tributesCloud.innerHTML = normalized
+    .map((message, index) => {
+      const delay = (index % 10) * 0.35;
+      const duration = 4.6 + (index % 5) * 0.35;
+      const itemLabel = message.itemName ? `<small>Item: ${escapeHtml(message.itemName)}</small>` : "";
+
+      return `
+        <article class="tribute-bubble" style="animation-delay:${delay}s;animation-duration:${duration}s">
+          <p>${escapeHtml(message.text)}</p>
+          ${itemLabel}
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function buildFallbackTributes() {
+  return Object.entries(reservationState)
+    .filter(([, value]) => value?.isReserved && normalizeActorName(value.reservedBy || ""))
+    .map(([itemId, value]) => ({
+      item_id: itemId,
+      item_name: itemMap[itemId]?.name || "",
+      message: normalizeActorName(value.reservedBy || "")
+    }));
+}
+
+async function loadTributesFromApi({ silent = false } = {}) {
+  try {
+    const data = await apiFetchJson("/api/messages");
+    renderTributes(data.messages || []);
+    return true;
+  } catch (error) {
+    if (!silent) console.warn("Falha ao carregar homenagens da API.", error);
+    renderTributes(buildFallbackTributes());
+    return false;
+  }
+}
+
 function updateCardUi(card) {
   const id = card.dataset.itemId;
   const item = itemMap[id];
@@ -658,9 +730,13 @@ bindGiftCardEvents();
 renderGiftSections();
 buildNavigationUi();
 void loadReservationsFromApi({ silent: true });
+void loadTributesFromApi({ silent: true });
 window.setInterval(() => {
   void loadReservationsFromApi({ silent: true });
 }, RESERVATION_REFRESH_MS);
+window.setInterval(() => {
+  void loadTributesFromApi({ silent: true });
+}, TRIBUTES_REFRESH_MS);
 
 navToggle.addEventListener("click", () => {
   if (drawer.classList.contains("is-open")) closeDrawer();
