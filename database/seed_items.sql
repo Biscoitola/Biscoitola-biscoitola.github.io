@@ -29,7 +29,6 @@ values
   ('coz-liquidificador-multiprocessador', 'cozinha', 'Liquidificador multiprocessador', 'Versao 2 em 1.'),
   ('lim-aspirador', 'limpeza', 'Aspirador', 'Item solicitado (link em breve).'),
   ('lim-aspirador-philco', 'limpeza', 'Aspirador de po Philco', 'Opcao de aspirador para casa.'),
-  ('lim-vassoura-cabo', 'limpeza', 'Vassoura com cabo', 'Vassoura para limpeza geral.'),
   ('lim-rodo', 'limpeza', 'Rodo', 'Rodo para piso.'),
   ('lim-dispenser-lavanderia', 'limpeza', 'Kit 3 dispenser lavanderia', 'Dispenser para sabao/amaciante.'),
   ('lim-cesto-bambu-duplo', 'limpeza', 'Cesto de bambu grande duplo com divisorias', 'Cesto para roupas sujas com divisorias.'),
@@ -62,3 +61,6 @@ where id = 'coz-esterilizador-facas';
 
 delete from gift_items
 where id = 'coz-porta-escova-dente';
+
+delete from gift_items
+where id = 'lim-vassoura-cabo';

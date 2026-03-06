@@ -174,33 +174,14 @@ function ensureActorName(promptMessage, forceAsk = false) {
 }
 
 function ensureActorPin(forceAsk = false) {
-  if (!forceAsk && currentActorPin && currentActorPin.length >= 4) return currentActorPin;
-
-  const typed = window.prompt("Digite seu PIN (mínimo 4 caracteres):", currentActorPin || "") || "";
-  const normalized = normalizeActorName(typed);
-
-  if (!normalized || normalized.length < 4) {
-    alert("Informe um PIN com pelo menos 4 caracteres.");
-    return null;
-  }
-
-  const confirmTyped = window.prompt("Confirme seu PIN:", normalized) || "";
-  const confirmNormalized = normalizeActorName(confirmTyped);
-  if (confirmNormalized !== normalized) {
-    alert("PIN não confere. Tente novamente.");
-    return null;
-  }
-
-  currentActorPin = normalized;
+  if (!forceAsk && currentActorPin) return currentActorPin;
+  currentActorPin = normalizeActorName(currentActorName || "");
   localStorage.setItem(USER_PIN_STORAGE_KEY, currentActorPin);
   return currentActorPin;
 }
 
 function askRecoveryPin() {
-  const typed = window.prompt("Este item foi reservado em outro dispositivo. Digite seu PIN para liberar:") || "";
-  const normalized = normalizeActorName(typed);
-  if (!normalized || normalized.length < 4) return null;
-  return normalized;
+  return normalizeActorName(currentActorName || "");
 }
 
 function decodeHtmlEntities(value) {
@@ -442,6 +423,8 @@ async function toggleRegularReservation(item) {
     true
   );
   if (!actorName) return;
+  currentActorPin = actorName;
+  localStorage.setItem(USER_PIN_STORAGE_KEY, currentActorPin);
   const actorPin = ensureActorPin(true);
   if (!actorPin) return;
 
@@ -492,10 +475,10 @@ async function toggleRegularReservation(item) {
             return;
           } catch (retryError) {
             if (retryError.status === 403) {
-              alert("PIN inválido ou reserva pertence a outra pessoa.");
+              alert("Nome inválido ou reserva pertence a outra pessoa.");
             } else {
-              console.error("Falha ao recuperar liberacao por PIN.", retryError);
-              alert("Não foi possível validar seu PIN agora. Tente novamente.");
+              console.error("Falha ao recuperar liberação por nome.", retryError);
+              alert("Não foi possível validar seu nome agora. Tente novamente.");
             }
           }
         }
@@ -508,7 +491,7 @@ async function toggleRegularReservation(item) {
       alert(shouldReserve ? "Este item acabou de ser reservado por outra pessoa." : "Este item já estava disponivel.");
     } else if (error.status === 400) {
       if (error.payload?.error === "actor_pin_required") {
-        alert("Defina um PIN com pelo menos 4 caracteres para reservar.");
+        alert("Informe seu nome para reservar.");
       } else {
         alert("Informe seus dados para continuar.");
       }
