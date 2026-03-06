@@ -111,13 +111,13 @@ app.get("/api/messages", async (_req, res) => {
     const result = await pool.query(
       `
       select
-        re.event_id,
-        re.actor_name as message,
-        re.created_at
-      from reservation_events re
-      where re.action = 'reserve'
-        and nullif(trim(re.actor_name), '') is not null
-      order by re.created_at desc
+        gi.id as item_id,
+        gi.reserved_by as message,
+        gi.reserved_at as created_at
+      from gift_items gi
+      where gi.is_reserved = true
+        and nullif(trim(gi.reserved_by), '') is not null
+      order by gi.reserved_at desc nulls last
       limit 120
       `
     );
@@ -293,4 +293,6 @@ async function start() {
 }
 
 void start();
+
+
 
