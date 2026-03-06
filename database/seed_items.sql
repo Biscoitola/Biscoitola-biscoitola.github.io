@@ -1,4 +1,4 @@
--- Seed current gift list into PostgreSQL
+﻿-- Seed current gift list into PostgreSQL
 -- Run after schema.sql
 
 insert into gift_items (id, category_id, name, description)
@@ -12,7 +12,7 @@ values
   ('coz-assadeiras-vidro-marinex', 'cozinha', 'Jogo 3 Assadeiras de Vidro Marinex', 'Jogo com 3 assadeiras retangulares de vidro.'),
   ('coz-chaleira-eletrica-inox', 'cozinha', 'Chaleira Eletrica Inox', 'Chaleira eletrica inox com desligamento automatico.'),
   ('coz-fervedor-leiteira', 'cozinha', 'Fervedor Leiteira Antiaderente', 'Fervedor leiteira antiaderente para cozinha.'),
-  ('coz-oven-fryer-oster', 'cozinha', 'Fritadeira sem Óleo Oster Oven Fryer 3 em 1', 'Oven fryer 3 em 1, 12 litros, 1800W.'),
+  ('coz-oven-fryer-oster', 'cozinha', 'Fritadeira sem Ã“leo Oster Oven Fryer 3 em 1', 'Oven fryer 3 em 1, 12 litros, 1800W.'),
   ('coz-abridor-latas-manual', 'cozinha', 'Abridor de Latas Manual Premium', 'Abridor de latas manual multiuso.'),
   ('coz-forma-pizza-redonda', 'cozinha', 'Forma de Pizza Redonda Antiaderente', 'Assadeira redonda antiaderente para pizza.'),
   ('coz-abridor-furador-vinho', 'cozinha', 'Abridor e Furador de Vinho', 'Abridor/furador profissional portatil para vinho.'),
@@ -40,8 +40,9 @@ values
   ('ban-porta-escova-dente', 'banheiro', 'Porta Escova de Dente', 'Porta escova de dente para banheiro.'),
   ('ban-lixeira-12l-inox', 'banheiro', 'Lixeira banheiro 12L inox', 'Lixeira inox para banheiro.'),
   ('ban-kit-tapetes', 'banheiro', 'Kit tapetes de banheiro', 'Conjunto de tapetes para banheiro.'),
-  ('qua-kit-casal-4pecas-cor-lisa', 'quarto', 'Kit casal 4 pecas cor lisa', 'Conjunto para cama de casal (link em breve).'),
-  ('qua-kit-casal-4pecas', 'quarto', 'Kit casal 4 pecas', 'Outra opcao de kit de cama casal (link em breve).')
+  ('qua-kit-casal-4pecas-cor-lisa', 'quarto', 'Kit casal 4 pecas cor lisa', 'Jogo de cama casal liso, opcao classica e elegante.'),
+  ('qua-kit-casal-4pecas', 'quarto', 'Kit casal 4 pecas', 'Jogo de cama casal estampado, opcao alegre e delicada.')
+
 on conflict (id) do update
 set category_id = excluded.category_id,
     name = excluded.name,
@@ -64,3 +65,7 @@ where id = 'coz-porta-escova-dente';
 
 delete from gift_items
 where id = 'lim-vassoura-cabo';
+
+
+
+
