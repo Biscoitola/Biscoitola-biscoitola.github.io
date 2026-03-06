@@ -157,10 +157,10 @@ function getReserveButtonState(item) {
   };
 }
 
-function ensureActorName(promptMessage) {
-  if (currentActorName) return currentActorName;
+function ensureActorName(promptMessage, forceAsk = false) {
+  if (!forceAsk && currentActorName) return currentActorName;
 
-  const typed = window.prompt(promptMessage || "Digite seu nome para reservar itens:") || "";
+  const typed = window.prompt(promptMessage || "Digite seu nome para reservar itens:", currentActorName || "") || "";
   const normalized = normalizeActorName(typed);
 
   if (!normalized) {
@@ -173,10 +173,10 @@ function ensureActorName(promptMessage) {
   return currentActorName;
 }
 
-function ensureActorPin() {
-  if (currentActorPin && currentActorPin.length >= 4) return currentActorPin;
+function ensureActorPin(forceAsk = false) {
+  if (!forceAsk && currentActorPin && currentActorPin.length >= 4) return currentActorPin;
 
-  const typed = window.prompt("Crie um PIN (mínimo 4 caracteres) para proteger suas reservas:") || "";
+  const typed = window.prompt("Digite seu PIN (mínimo 4 caracteres):", currentActorPin || "") || "";
   const normalized = normalizeActorName(typed);
 
   if (!normalized || normalized.length < 4) {
@@ -184,7 +184,7 @@ function ensureActorPin() {
     return null;
   }
 
-  const confirmTyped = window.prompt("Confirme seu PIN:") || "";
+  const confirmTyped = window.prompt("Confirme seu PIN:", normalized) || "";
   const confirmNormalized = normalizeActorName(confirmTyped);
   if (confirmNormalized !== normalized) {
     alert("PIN não confere. Tente novamente.");
@@ -438,11 +438,12 @@ async function toggleRegularReservation(item) {
 
   const shouldReserve = !isReserved(item);
   const actorName = ensureActorName(
-    shouldReserve ? "Digite seu nome para reservar este item:" : "Digite seu nome para liberar este item:"
+    shouldReserve ? "Digite seu nome para reservar este item:" : "Digite seu nome para liberar este item:",
+    true
   );
   if (!actorName) return;
-  const actorPin = shouldReserve ? ensureActorPin() : currentActorPin;
-  if (shouldReserve && !actorPin) return;
+  const actorPin = ensureActorPin(true);
+  if (!actorPin) return;
 
   setReserveButtonsDisabled(item.id, true);
 
