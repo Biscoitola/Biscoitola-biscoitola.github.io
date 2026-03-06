@@ -12,6 +12,7 @@ values
   ('coz-assadeiras-vidro-marinex', 'cozinha', 'Jogo 3 Assadeiras de Vidro Marinex', 'Jogo com 3 assadeiras retangulares de vidro.'),
   ('coz-chaleira-eletrica-inox', 'cozinha', 'Chaleira Eletrica Inox', 'Chaleira eletrica inox com desligamento automatico.'),
   ('coz-fervedor-leiteira', 'cozinha', 'Fervedor Leiteira Antiaderente', 'Fervedor leiteira antiaderente para cozinha.'),
+  ('coz-oven-fryer-oster', 'cozinha', 'Fritadeira sem Óleo Oster Oven Fryer 3 em 1', 'Oven fryer 3 em 1, 12 litros, 1800W.'),
   ('coz-abridor-latas-manual', 'cozinha', 'Abridor de Latas Manual Premium', 'Abridor de latas manual multiuso.'),
   ('coz-forma-pizza-redonda', 'cozinha', 'Forma de Pizza Redonda Antiaderente', 'Assadeira redonda antiaderente para pizza.'),
   ('coz-abridor-furador-vinho', 'cozinha', 'Abridor e Furador de Vinho', 'Abridor/furador profissional portatil para vinho.'),
