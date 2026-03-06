@@ -164,7 +164,7 @@ function ensureActorName(promptMessage, forceAsk = false) {
 
   const typed =
     window.prompt(
-      promptMessage || "Escreva uma frase para homenagear o casal:",
+      promptMessage || "Escreva seu nome e uma frase para homenagear o casal:(obrigatório)",
       currentActorName || ""
     ) || "";
   const normalized = normalizeActorName(typed);
