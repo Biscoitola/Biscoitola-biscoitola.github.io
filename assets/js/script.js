@@ -610,7 +610,9 @@ function renderTributes(messages = []) {
 
   const normalized = (messages || [])
     .map((message) => ({
-      text: normalizeActorName(message.message || message.actor_name || "")
+      text: normalizeActorName(message.message || message.actor_name || ""),
+      itemId: normalizeActorName(message.item_id || ""),
+      itemName: normalizeActorName(message.item_name || itemMap[message.item_id]?.name || "")
     }))
     .filter((message) => message.text);
 
@@ -624,10 +626,12 @@ function renderTributes(messages = []) {
     .map((message, index) => {
       const delay = (index % 10) * 0.35;
       const duration = 4.6 + (index % 5) * 0.35;
+      const reservedLabel = message.itemName ? `Reservou: ${message.itemName}` : "";
 
       return `
         <article class="tribute-bubble" style="animation-delay:${delay}s;animation-duration:${duration}s">
           <p>${escapeHtml(message.text)}</p>
+          ${reservedLabel ? `<small>${escapeHtml(reservedLabel)}</small>` : ""}
         </article>
       `;
     })
@@ -637,7 +641,9 @@ function renderTributes(messages = []) {
 function buildFallbackTributes() {
   return Object.entries(reservationState)
     .filter(([, value]) => value?.isReserved && normalizeActorName(value.reservedBy || ""))
-    .map(([, value]) => ({
+    .map(([itemId, value]) => ({
+      item_id: itemId,
+      item_name: itemMap[itemId]?.name || "",
       message: normalizeActorName(value.reservedBy || "")
     }));
 }
